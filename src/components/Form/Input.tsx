@@ -13,7 +13,7 @@ const Input = ({
   type,
 }: {
   label: string;
-  register: UseFormRegister<SignUpFormValues>;
+  register: UseFormRegister<any>;
   required: boolean;
   error: FieldError | undefined;
   errorMessage: string;
@@ -41,7 +41,7 @@ const Input = ({
           type={
             type === "password" ? `${showPass ? "text" : "password"}` : type
           }
-          className="input input-bordered w-full max-w-xs"
+          className="input input-bordered w-full max-w-xs rounded-none"
         />
         {name === "password" && (
           <>

@@ -49,3 +49,14 @@ main.form-container {
 main.form-container .overlay {
   background-color: rgb(17 18 36 / 70%);
 }
+
+/*========LOGIN ===========*/
+
+.login-wrapper {
+  background-image: url("../src/assets/images/bg-login.jpg");
+  background-repeat: no-repeat;
+  background-position-x: 200px;
+  background-color: #030303;
+
+  background-size: cover;
+}
