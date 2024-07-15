@@ -10,11 +10,14 @@ import SignUp from "./pages/SignUp";
 import Footer from "./components/Footer";
 import Comic from "./pages/Comic";
 import Character from "./pages/Character";
+import ToastCaller from "./components/ToastCaller";
+import Login from "./Login";
 
 function App() {
   return (
     <>
       <Router>
+        <ToastCaller />
         <Header />
         <Routes>
           <Route path="/" element={<Home />}></Route>
@@ -23,6 +26,7 @@ function App() {
           <Route path="/characters" element={<Characters />}></Route>
           <Route path="/character/:id" element={<Character />}></Route>
           <Route path="/signup" element={<SignUp />}></Route>
+          <Route path="/login" element={<Login />}></Route>
         </Routes>
         <Footer />
       </Router>

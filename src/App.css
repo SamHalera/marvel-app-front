@@ -40,3 +40,23 @@ header {
 .btn-marvel {
   @apply bg-primary border-primary rounded-none transition-colors hover:bg-transparent hover:border-primary text-white;
 }
+
+/*========SIGN UP===========*/
+main.form-container {
+  background-image: url("./assets/images/poster-min.png");
+  /* background-image: url("./assets/images/bg-login.jpg"); */
+}
+main.form-container .overlay {
+  background-color: rgb(17 18 36 / 70%);
+}
+
+/*========LOGIN ===========*/
+
+.login-wrapper {
+  background-image: url("../src/assets/images/bg-login.jpg");
+  background-repeat: no-repeat;
+  background-position-x: 200px;
+  background-color: #030303;
+
+  background-size: cover;
+}
