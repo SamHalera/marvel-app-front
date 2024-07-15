@@ -40,6 +40,7 @@ const Characters = () => {
       );
       const data = await response.json();
 
+      console.log(data);
       setData(data);
       setNbPages(Math.ceil(data.count / 100));
       setIsLoading(false);

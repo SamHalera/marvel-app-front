@@ -23,6 +23,7 @@ function App() {
           <Route path="/characters" element={<Characters />}></Route>
           <Route path="/character/:id" element={<Character />}></Route>
           <Route path="/signup" element={<SignUp />}></Route>
+          <Route path="/login" element={<SignUp />}></Route>
         </Routes>
         <Footer />
       </Router>

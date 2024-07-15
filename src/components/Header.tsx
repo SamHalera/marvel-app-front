@@ -35,13 +35,18 @@ const Header = () => {
             Comics
           </Link>
 
-          {/* <Link
+          <Link
             className="text-xl text-white hover:text-primary transition-colors"
             to={"/signup"}
           >
             Signup
           </Link>
-          <a className="cursor-pointer">Login</a> */}
+          <Link
+            className="text-xl text-white hover:text-primary transition-colors"
+            to={"/login"}
+          >
+            Login
+          </Link>
         </nav>
       </div>
     </header>
