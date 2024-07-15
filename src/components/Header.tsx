@@ -15,7 +15,7 @@ const Header = () => {
         alt=""
       />
       <div className="flex justify-between">
-        <nav className="mr-5 hidden items-center gap-4 md:flex">
+        <nav className="mr-5 hidden items-center gap-6 md:flex">
           <Link
             className="text-xl text-white hover:text-primary transition-colors"
             to="/"
@@ -35,13 +35,13 @@ const Header = () => {
             Comics
           </Link>
 
-          <Link
+          {/* <Link
             className="text-xl text-white hover:text-primary transition-colors"
             to={"/signup"}
           >
             Signup
           </Link>
-          <a className="cursor-pointer">Login</a>
+          <a className="cursor-pointer">Login</a> */}
         </nav>
       </div>
     </header>

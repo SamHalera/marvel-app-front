@@ -1,8 +1,9 @@
 import React, { ChangeEvent } from "react";
-import { ComicsType } from "../types";
+import { CharactersType, ComicsType } from "../types";
 
 const Pagination = ({
-  setData,
+  setDataCharacters,
+  setDataComics,
   setIsLoading,
   page,
   setPage,
@@ -11,7 +12,10 @@ const Pagination = ({
   apiUrl,
 }: // token,
 {
-  setData: React.Dispatch<React.SetStateAction<ComicsType | null>>;
+  setDataCharacters?: React.Dispatch<
+    React.SetStateAction<CharactersType | null>
+  >;
+  setDataComics?: React.Dispatch<React.SetStateAction<ComicsType | null>>;
   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
   page: number;
   setPage: React.Dispatch<React.SetStateAction<number>>;
@@ -37,7 +41,8 @@ const Pagination = ({
       const response = await fetch(`${apiUrl}?skip=${value}`);
       const data = await response.json();
 
-      setData(data);
+      setDataCharacters && setDataCharacters(data);
+      setDataComics && setDataComics(data);
       setPage(value);
       setSkip(value);
       setIsLoading(false);
