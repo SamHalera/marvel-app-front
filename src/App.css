@@ -1,3 +1,31 @@
-#root {
+/* #root {
   margin-top: 150px;
+} */
+html {
+  scroll-behavior: smooth;
+  transition: all 1s ease-in-out;
+}
+body {
+  font-family: "Montserrat", sans-serif;
+}
+header {
+  background-image: linear-gradient(
+    to right top,
+    #161a3a,
+    #13162f,
+    #111224,
+    #0d0d1a,
+    #06060e
+  );
+}
+/*=======HOME=======*/
+.hero {
+  background-image: url("../src//assets/images/bg-img-home.jpg");
+}
+.section-heroe {
+  background-image: url("../src//assets/images/poster.png");
+}
+
+.btn-marvel {
+  @apply bg-primary border-primary rounded-none transition-colors hover:bg-transparent hover:border-primary text-white;
 }
