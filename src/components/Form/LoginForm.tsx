@@ -51,7 +51,7 @@ const LoginForm = ({
     } catch (error) {}
   };
   return (
-    <div className="">
+    <div className=" flex flex-col gap-6 py-4">
       <h2 className="text-white text-2xl">
         Please login if you want to go further and enjoy more{" "}
         <span className="text-red-600 font-bold">Marvelous</span> Contents
