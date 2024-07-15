@@ -26,6 +26,17 @@ header {
   background-image: url("../src//assets/images/poster.png");
 }
 
+/*=====COMICS======*/
+.bg-comics {
+  /* height: 40vh; */
+  background-color: #161a3a;
+  width: 100%;
+  background-image: url("../src/assets/images/bg-comics.jpg");
+}
+.search-bar input:focus {
+  outline: none;
+}
+
 .btn-marvel {
   @apply bg-primary border-primary rounded-none transition-colors hover:bg-transparent hover:border-primary text-white;
 }
