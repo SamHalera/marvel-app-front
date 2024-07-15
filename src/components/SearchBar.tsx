@@ -1,15 +1,15 @@
 import React, { ChangeEvent } from "react";
 
 const SearchBar = ({
-  setValue,
-  setSkip,
-  value,
+  // setValue,
+  // setSkip,
+  // value,
   label,
   handleSearch,
 }: {
-  setValue: React.Dispatch<React.SetStateAction<string>>;
-  setSkip: React.Dispatch<React.SetStateAction<number>>;
-  value: string;
+  // setValue: React.Dispatch<React.SetStateAction<string>>;
+  // setSkip: React.Dispatch<React.SetStateAction<number>>;
+  // value: string;
   label: string;
   handleSearch: (value: string) => void;
 }) => {

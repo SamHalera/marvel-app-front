@@ -33,6 +33,7 @@ const Comics = () => {
     const fetchData = async () => {
       // const emailQuery = user ? `&email=${user.email}` : "";
       // title variable will be useless
+
       const emailQuery = "";
 
       const response = await fetch(
@@ -53,13 +54,7 @@ const Comics = () => {
           <h1 className=" text-center text-4xl font-bold uppercase text-white md:text-5xl">
             Find your favorite <span className="red">Comic</span>
           </h1>
-          <SearchBar
-            value={title}
-            setValue={setTitle}
-            setSkip={setSkip}
-            label="comic"
-            handleSearch={handleSearch}
-          />
+          <SearchBar label="comic" handleSearch={handleSearch} />
         </div>
       </section>
       {isLoading ? (
@@ -94,7 +89,7 @@ const Comics = () => {
         </div>
       )}
       <Pagination
-        setData={setData}
+        setDataComics={setData}
         setIsLoading={setIsLoading}
         page={page}
         setPage={setPage}

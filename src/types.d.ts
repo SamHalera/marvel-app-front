@@ -25,10 +25,18 @@ export type CharacterItemArray = {
   thumbnail: { path: string; extension: string };
   comics: string[];
   name: string;
-  description: "";
+  description: string;
   __v: 0;
 };
 
+export type CharacterDataType = {
+  _id: string;
+  thumbnail: { path: string; extension: string };
+  comics: ComicItemArray[];
+  name: string;
+  description: string;
+  __v: 0;
+};
 export type CharactersType = {
   count: number;
   limit: number;

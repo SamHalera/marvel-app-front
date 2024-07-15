@@ -9,6 +9,7 @@ import Characters from "./pages/Characters";
 import SignUp from "./pages/SignUp";
 import Footer from "./components/Footer";
 import Comic from "./pages/Comic";
+import Character from "./pages/Character";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path="/comics" element={<Comics />}></Route>
           <Route path="/comic/:id" element={<Comic />}></Route>
           <Route path="/characters" element={<Characters />}></Route>
+          <Route path="/character/:id" element={<Character />}></Route>
           <Route path="/signup" element={<SignUp />}></Route>
         </Routes>
         <Footer />
