@@ -2,7 +2,14 @@
 module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        primary: "#ed1d24",
+      },
+      btn: {
+        borderRadius: 0,
+      },
+    },
   },
   daisyui: {
     themes: ["dark"],
