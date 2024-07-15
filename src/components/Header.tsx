@@ -15,12 +15,32 @@ const Header = () => {
         alt=""
       />
       <div className="flex justify-between">
-        <nav className="nav-desktop mr-5 hidden items-center gap-2 md:flex">
-          <Link to="/">Home</Link>
-          <Link to="/characters">Characters</Link>
-          <Link to="/comics">Comics</Link>
+        <nav className="mr-5 hidden items-center gap-4 md:flex">
+          <Link
+            className="text-xl text-white hover:text-primary transition-colors"
+            to="/"
+          >
+            Home
+          </Link>
+          <Link
+            className="text-xl text-white hover:text-primary transition-colors"
+            to="/characters"
+          >
+            Characters
+          </Link>
+          <Link
+            className="text-xl text-white hover:text-primary transition-colors"
+            to="/comics"
+          >
+            Comics
+          </Link>
 
-          <Link to={"/signup"}>Signup</Link>
+          <Link
+            className="text-xl text-white hover:text-primary transition-colors"
+            to={"/signup"}
+          >
+            Signup
+          </Link>
           <a className="cursor-pointer">Login</a>
         </nav>
       </div>
