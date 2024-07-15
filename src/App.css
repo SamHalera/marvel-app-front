@@ -1,38 +1,42 @@
-.App {
-  text-align: center;
+/* #root {
+  margin-top: 150px;
+} */
+html {
+  scroll-behavior: smooth;
+  transition: all 1s ease-in-out;
+}
+body {
+  font-family: "Montserrat", sans-serif;
+}
+header {
+  background-image: linear-gradient(
+    to right top,
+    #161a3a,
+    #13162f,
+    #111224,
+    #0d0d1a,
+    #06060e
+  );
+}
+/*=======HOME=======*/
+.hero {
+  background-image: url("../src//assets/images/bg-img-home.jpg");
+}
+.section-heroe {
+  background-image: url("../src//assets/images/poster.png");
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/*=====COMICS======*/
+.bg-comics {
+  /* height: 40vh; */
+  background-color: #161a3a;
+  width: 100%;
+  background-image: url("../src/assets/images/bg-comics.jpg");
+}
+.search-bar input:focus {
+  outline: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.btn-marvel {
+  @apply bg-primary border-primary rounded-none transition-colors hover:bg-transparent hover:border-primary text-white;
 }
