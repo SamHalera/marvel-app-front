@@ -1,10 +1,6 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import {
-  CharacterDataType,
-  CharacterItemArray,
-  CharactersType,
-} from "../types";
+import { CharacterDataType } from "../types";
 import { baseAPIUrl } from "../api";
 import Loader from "../components/Loader";
 import FavoritesComponent from "../components/FavoritesComponent";
@@ -28,7 +24,7 @@ const Character = () => {
 
         setIsLoading(false);
       } catch (error) {
-        console.log(error);
+        console.error(error);
       }
     };
     fetchData();

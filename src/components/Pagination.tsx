@@ -47,7 +47,7 @@ const Pagination = ({
       setSkip(value);
       setIsLoading(false);
     } catch (error) {
-      console.log(error, "message error");
+      console.error(error, "message error");
     }
   };
   return (

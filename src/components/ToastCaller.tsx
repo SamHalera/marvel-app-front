@@ -1,6 +1,6 @@
+import { useEffect } from "react";
 import { toast, Toaster } from "sonner";
 
-import React, { useEffect } from "react";
 import { useToastStore } from "../stores/toast";
 
 const ToastCaller = () => {
@@ -15,7 +15,6 @@ const ToastCaller = () => {
 
   useEffect(() => {
     if (successMessage) {
-      console.log("ToastCaller success");
       toast.success(successMessage);
       setSuccessMessage(null);
     }

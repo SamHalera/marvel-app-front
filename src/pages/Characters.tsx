@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { CharactersType } from "../types";
 import { useDebouncedCallback } from "use-debounce";
 import { baseAPIUrl } from "../api";
@@ -14,7 +14,7 @@ const Characters = () => {
   const [page, setPage] = useState<number>(1);
   const [nbPages, setNbPages] = useState<number>(0);
   const [skip, setSkip] = useState<number>(1);
-  const [isOpen, setIsOpen] = useState<boolean>(false);
+
   const [filterValue, setFilterValue] = useState<string>("");
 
   const handleSearch = useDebouncedCallback((value: string) => {
@@ -40,11 +40,9 @@ const Characters = () => {
       );
       const data = await response.json();
 
-      console.log(data);
       setData(data);
       setNbPages(Math.ceil(data.count / 100));
       setIsLoading(false);
-      console.log(data);
     };
     fetchData();
   }, []);

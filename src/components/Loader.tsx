@@ -1,4 +1,3 @@
-import spinner from "../assets/images/spinner.gif";
 const Loader = () => {
   return (
     <div className="loader mx-12 flex items-center justify-center p-10 text-3xl text-white">
