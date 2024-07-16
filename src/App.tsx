@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -12,8 +12,17 @@ import Comic from "./pages/Comic";
 import Character from "./pages/Character";
 import ToastCaller from "./components/ToastCaller";
 import Login from "./Login";
+import { useUserCookiesStore } from "./stores/userCookies";
+import Cookies from "js-cookie";
 
 function App() {
+  const { userCookies, setUserCookies } = useUserCookiesStore();
+
+  useEffect(() => {
+    const cookies = Cookies.get("user");
+
+    cookies && setUserCookies(JSON.parse(cookies));
+  }, []);
   return (
     <>
       <Router>

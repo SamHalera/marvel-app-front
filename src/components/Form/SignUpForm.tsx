@@ -6,6 +6,9 @@ import { Link, Navigate, redirect, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { useToastStore } from "../../stores/toast";
 import ModalLogin from "./ModalLogin";
+import { useUserCookiesStore } from "../../stores/userCookies";
+import { createUserCookies } from "../../libs/utils";
+import { UserInterface } from "../../types";
 
 export type SignUpFormValues = {
   username: string;
@@ -21,6 +24,7 @@ const SignUpForm = () => {
   const [openModal, setOpenModal] = useState<boolean>(false);
 
   const { setErrorMessage, setSuccessMessage } = useToastStore();
+  const { userCookies, setUserCookies } = useUserCookiesStore();
 
   const {
     register,
@@ -30,9 +34,8 @@ const SignUpForm = () => {
   } = useForm<SignUpFormValues>();
 
   const navigate = useNavigate();
-  console.log(errors);
+
   const onSubmit: SubmitHandler<SignUpFormValues> = async (values) => {
-    console.log(values);
     try {
       const response = await fetch(`${baseAPIUrl}/user/signup`, {
         method: "POST",
@@ -43,9 +46,12 @@ const SignUpForm = () => {
         body: JSON.stringify(values),
       });
       const data = await response.json();
-      console.log(data);
+
       if (data.token) {
-        console.log("ici");
+        const cookies = createUserCookies(data);
+
+        cookies && setUserCookies(JSON.parse(cookies));
+
         setSuccessMessage(
           "User has been created! Welcome to the marvelous world!"
         );

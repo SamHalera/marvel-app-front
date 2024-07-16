@@ -2,14 +2,20 @@ import React, { useState } from "react";
 import logo from "../assets/images/logo.svg";
 import { Link, useNavigate } from "react-router-dom";
 import ModalLogin from "./Form/ModalLogin";
+import { useUserCookiesStore } from "../stores/userCookies";
+import Cookies from "js-cookie";
 
 const Header = () => {
   const [openModal, setOpenModal] = useState<boolean>(false);
+  const { userCookies, setUserCookies } = useUserCookiesStore();
   const navigate = useNavigate();
 
   return (
     <>
-      <ModalLogin openModal={openModal} setOpenModal={setOpenModal} />
+      {openModal && (
+        <ModalLogin openModal={openModal} setOpenModal={setOpenModal} />
+      )}
+
       <header className="fixed top-0 z-40 flex w-full items-center justify-between px-12 py-5">
         <img
           onClick={() => {
@@ -39,21 +45,36 @@ const Header = () => {
             >
               Comics
             </Link>
+            {userCookies ? (
+              <div
+                onClick={() => {
+                  Cookies.remove("user");
+                  setUserCookies(null);
 
-            <Link
-              className="text-xl text-white hover:text-primary transition-colors"
-              to={"/signup"}
-            >
-              Signup
-            </Link>
-            <div
-              onClick={() => {
-                setOpenModal(true);
-              }}
-              className=" cursor-pointer text-xl text-white hover:text-primary transition-colors"
-            >
-              Login
-            </div>
+                  navigate("/");
+                }}
+                className=" cursor-pointer text-xl text-white hover:text-primary transition-colors"
+              >
+                Logout
+              </div>
+            ) : (
+              <>
+                <Link
+                  className="text-xl text-white hover:text-primary transition-colors"
+                  to={"/signup"}
+                >
+                  Signup
+                </Link>
+                <div
+                  onClick={() => {
+                    setOpenModal(true);
+                  }}
+                  className=" cursor-pointer text-xl text-white hover:text-primary transition-colors"
+                >
+                  Login
+                </div>
+              </>
+            )}
           </nav>
         </div>
       </header>

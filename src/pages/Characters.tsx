@@ -6,6 +6,7 @@ import SearchBar from "../components/SearchBar";
 import Loader from "../components/Loader";
 import Pagination from "../components/Pagination";
 import CharacterComponent from "../components/Character/CharacterComponent";
+import { useUserCookiesStore } from "../stores/userCookies";
 
 const Characters = () => {
   const [data, setData] = useState<CharactersType | null>(null);
@@ -17,6 +18,7 @@ const Characters = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [filterValue, setFilterValue] = useState<string>("");
 
+  const { userCookies, setUserCookies } = useUserCookiesStore();
   const handleSearch = useDebouncedCallback((value: string) => {
     setFilterValue(value);
   }, 500);
@@ -40,11 +42,9 @@ const Characters = () => {
       );
       const data = await response.json();
 
-      console.log(data);
       setData(data);
       setNbPages(Math.ceil(data.count / 100));
       setIsLoading(false);
-      console.log(data);
     };
     fetchData();
   }, []);

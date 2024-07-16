@@ -3,6 +3,8 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { baseAPIUrl } from "../../api";
 import Input from "./Input";
+import { useUserCookiesStore } from "../../stores/userCookies";
+import { createUserCookies } from "../../libs/utils";
 
 export type LoginFormValues = {
   email: string;
@@ -17,6 +19,7 @@ const LoginForm = ({
 
   const [errorEmail, setErrorEmail] = useState<string>("");
   const [errorPass, setErrorPass] = useState<string>("");
+  const { userCookies, setUserCookies } = useUserCookiesStore();
 
   const {
     register,
@@ -26,10 +29,8 @@ const LoginForm = ({
   } = useForm<LoginFormValues>();
 
   const navigate = useNavigate();
-  console.log(errors);
 
   const onSubmit: SubmitHandler<LoginFormValues> = async (values) => {
-    console.log(values);
     try {
       const response = await fetch(`${baseAPIUrl}/user/login`, {
         method: "POST",
@@ -40,10 +41,11 @@ const LoginForm = ({
         body: JSON.stringify(values),
       });
       const data = await response.json();
-      console.log(data);
-      if (data.token) {
-        console.log("ici");
 
+      if (data.token) {
+        const cookies = createUserCookies(data);
+
+        cookies && setUserCookies(JSON.parse(cookies));
         setOpenModal(false);
         navigate("/");
         reset();

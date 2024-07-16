@@ -15,7 +15,6 @@ const ToastCaller = () => {
 
   useEffect(() => {
     if (successMessage) {
-      console.log("ToastCaller success");
       toast.success(successMessage);
       setSuccessMessage(null);
     }
