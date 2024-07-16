@@ -20,14 +20,11 @@ const CharacterComponent = ({
       </Link>
 
       <h2 className="text-2xl text-white">{character.name}</h2>
-      {/* <FavoritesComponent
-        item={character}
+      <FavoritesComponent
+        itemId={character?._id}
+        isFavorite={character?.isFavorite ?? false}
         label="character"
-        userCookies={userCookies}
-        handleAddFavorite={handleAddFavorite}
-        handleRemoveFavorite={handleRemoveFavorite}
-        openModal={openModal}
-      /> */}
+      />
 
       <p className=" text-white">
         {character.description && truncateStr(character.description, 100)}

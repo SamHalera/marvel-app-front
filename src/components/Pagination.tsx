@@ -13,9 +13,9 @@ const Pagination = ({
 }: // token,
 {
   setDataCharacters?: React.Dispatch<
-    React.SetStateAction<CharactersType | null>
+    React.SetStateAction<CharactersType | undefined>
   >;
-  setDataComics?: React.Dispatch<React.SetStateAction<ComicsType | null>>;
+  setDataComics?: React.Dispatch<React.SetStateAction<ComicsType | undefined>>;
   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
   page: number;
   setPage: React.Dispatch<React.SetStateAction<number>>;

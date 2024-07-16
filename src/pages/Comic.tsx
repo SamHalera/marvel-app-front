@@ -7,7 +7,7 @@ import { ArrowLeftIcon } from "@heroicons/react/24/solid";
 import FavoritesComponent from "../components/FavoritesComponent";
 
 const Comic = () => {
-  const [data, setData] = useState<ComicItemArray | null>();
+  const [data, setData] = useState<ComicItemArray>();
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const { id } = useParams();
@@ -54,14 +54,13 @@ const Comic = () => {
           <p className="mb-9  text-xl leading-8 text-white lg:w-2/4">
             {data?.description}
           </p>
-
-          <FavoritesComponent
-            // item={data}
-            label="comic"
-            // userCookies={userCookies}
-            // handleAddFavorite={handleAddFavorite}
-            // handleRemoveFavorite={handleRemoveFavorite}
-          />
+          {data && (
+            <FavoritesComponent
+              itemId={data._id}
+              label="comic"
+              isFavorite={data?.isFavorite ?? false}
+            />
+          )}
         </div>
       </div>
     </main>

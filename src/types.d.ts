@@ -12,6 +12,7 @@ export type ComicItemArray = {
   title: string;
   description: string;
   __v: number;
+  isFavorite?: boolean;
 };
 
 export type ComicsType = {
@@ -27,6 +28,7 @@ export type CharacterItemArray = {
   name: string;
   description: string;
   __v: 0;
+  isFavorite?: boolean;
 };
 
 export type CharacterDataType = {
@@ -36,6 +38,7 @@ export type CharacterDataType = {
   name: string;
   description: string;
   __v: 0;
+  isFavorite?: boolean;
 };
 export type CharactersType = {
   count: number;

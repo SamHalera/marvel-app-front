@@ -9,7 +9,7 @@ import SearchBar from "../components/SearchBar";
 import { useDebouncedCallback } from "use-debounce";
 
 const Comics = () => {
-  const [data, setData] = useState<ComicsType | null>(null);
+  const [data, setData] = useState<ComicsType>();
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [title, setTitle] = useState<string>("");
   const [page, setPage] = useState<number>(1);
@@ -21,12 +21,16 @@ const Comics = () => {
     setFilterValue(value);
   }, 500);
 
-  const dataFiltered = data?.results.filter((item) => {
-    if (filterValue) {
-      return item.title.toLowerCase().includes(filterValue.toLocaleLowerCase());
-    }
-    return item;
-  });
+  const dataFiltered = data
+    ? data.results.filter((item) => {
+        if (filterValue) {
+          return item.title
+            .toLowerCase()
+            .includes(filterValue.toLocaleLowerCase());
+        }
+        return item;
+      })
+    : [];
 
   useEffect(() => {
     const fetchData = async () => {
@@ -87,15 +91,17 @@ const Comics = () => {
           </div>
         </div>
       )}
-      <Pagination
-        setDataComics={setData}
-        setIsLoading={setIsLoading}
-        page={page}
-        setPage={setPage}
-        nbPages={nbPages}
-        setSkip={setSkip}
-        apiUrl={`${baseAPIUrl}/comics`}
-      />
+      {data && (
+        <Pagination
+          setDataComics={setData}
+          setIsLoading={setIsLoading}
+          page={page}
+          setPage={setPage}
+          nbPages={nbPages}
+          setSkip={setSkip}
+          apiUrl={`${baseAPIUrl}/comics`}
+        />
+      )}
     </main>
   );
 };

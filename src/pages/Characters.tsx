@@ -6,9 +6,11 @@ import SearchBar from "../components/SearchBar";
 import Loader from "../components/Loader";
 import Pagination from "../components/Pagination";
 import CharacterComponent from "../components/Character/CharacterComponent";
+import { useUserCookiesStore } from "../stores/userCookies";
+import Cookies from "js-cookie";
 
 const Characters = () => {
-  const [data, setData] = useState<CharactersType | null>(null);
+  const [data, setData] = useState<CharactersType>();
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [name, setName] = useState<string>("");
   const [page, setPage] = useState<number>(1);
@@ -17,23 +19,29 @@ const Characters = () => {
 
   const [filterValue, setFilterValue] = useState<string>("");
 
+  const { userCookies } = useUserCookiesStore();
   const handleSearch = useDebouncedCallback((value: string) => {
     setFilterValue(value);
   }, 500);
 
-  const dataFiltered = data?.results.filter((item) => {
-    if (filterValue) {
-      return item.name.toLowerCase().includes(filterValue.toLocaleLowerCase());
-    }
-    return item;
-  });
+  const dataFiltered = data
+    ? data?.results.filter((item) => {
+        if (filterValue) {
+          return item.name
+            .toLowerCase()
+            .includes(filterValue.toLocaleLowerCase());
+        }
+        return item;
+      })
+    : [];
 
   useEffect(() => {
     const fetchData = async () => {
-      // const emailQuery = user ? `&email=${user.email}` : "";
-      // title variable will be useless
+      const cookieUser = Cookies.get("user");
+      const user = cookieUser ? JSON.parse(cookieUser) : null;
 
-      const emailQuery = "";
+      const emailQuery = user ? `&email=${user.email}` : "";
+      // title variable will be useless
 
       const response = await fetch(
         `${baseAPIUrl}/characters?name=${name}${emailQuery}&skip=${skip}`
@@ -82,16 +90,18 @@ const Characters = () => {
                   })}
               </div>
             </section>
-            <Pagination
-              setDataCharacters={setData}
-              setIsLoading={setIsLoading}
-              page={page}
-              setPage={setPage}
-              nbPages={nbPages}
-              setSkip={setSkip}
-              apiUrl={`${baseAPIUrl}/characters`}
-              // token={user.token}
-            />
+            {data && (
+              <Pagination
+                setDataCharacters={setData}
+                setIsLoading={setIsLoading}
+                page={page}
+                setPage={setPage}
+                nbPages={nbPages}
+                setSkip={setSkip}
+                apiUrl={`${baseAPIUrl}/characters`}
+                // token={user.token}
+              />
+            )}
           </div>
         </div>
       )}

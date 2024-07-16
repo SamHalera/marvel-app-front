@@ -7,7 +7,7 @@ import FavoritesComponent from "../components/FavoritesComponent";
 import ComicsCarousel from "../components/Character/ComicsCarousel";
 
 const Character = () => {
-  const [data, setData] = useState<CharacterDataType | null>();
+  const [data, setData] = useState<CharacterDataType>();
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const { id } = useParams();
@@ -20,7 +20,8 @@ const Character = () => {
         );
 
         const data = await response.json();
-        setData(data);
+
+        data && setData(data);
 
         setIsLoading(false);
       } catch (error) {
@@ -29,6 +30,7 @@ const Character = () => {
     };
     fetchData();
   }, []);
+  console.log(data);
   return isLoading ? (
     <Loader />
   ) : (
@@ -39,13 +41,13 @@ const Character = () => {
             <h2 className=" text-center text-3xl font-bold text-white">
               {data?.name}
             </h2>
-            <FavoritesComponent
-              //   item={data}
-              label="character"
-              //   userCookies={userCookies}
-              //   handleAddFavorite={handleAddFavorite}
-              //   handleRemoveFavorite={handleRemoveFavorite}
-            />
+            {data && (
+              <FavoritesComponent
+                itemId={data._id}
+                isFavorite={data?.isFavorite ?? false}
+                label="character"
+              />
+            )}
           </div>
           <article className="character flex flex-col items-center">
             <div className="info-character mb-14 flex flex-col items-center justify-center gap-8  lg:flex-row lg:items-start">
