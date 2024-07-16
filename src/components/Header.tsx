@@ -1,21 +1,26 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import logo from "../assets/images/logo.svg";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import ModalLogin from "./Form/ModalLogin";
-import { useUserCookiesStore } from "../stores/userCookies";
+import { useTokenCookiesStore } from "../stores/tokenCookies";
 import Cookies from "js-cookie";
+import clsx from "clsx";
+import menuItems from "../assets/data/menuItems.json";
+import { useOpenModalStore } from "../stores/openModal";
 
 const Header = () => {
-  const [openModal, setOpenModal] = useState<boolean>(false);
-  const { userCookies, setUserCookies } = useUserCookiesStore();
+  // const [openModal, setOpenModal] = useState<boolean>(false);
+  const { tokenCookies, setTokenCookies } = useTokenCookiesStore();
+  const { openModal, setOpenModal } = useOpenModalStore();
   const navigate = useNavigate();
+  const { pathname } = useLocation();
 
+  console.log(openModal);
   return (
     <>
-      {openModal && (
+      {/* {openModal && (
         <ModalLogin openModal={openModal} setOpenModal={setOpenModal} />
-      )}
-
+      )} */}
       <header className="fixed top-0 z-40 flex w-full items-center justify-between px-12 py-5">
         <img
           onClick={() => {
@@ -26,55 +31,70 @@ const Header = () => {
           alt=""
         />
         <div className="flex justify-between">
-          <nav className="mr-5 hidden items-center gap-6 md:flex">
-            <Link
-              className="text-xl text-white hover:text-primary transition-colors"
-              to="/"
-            >
-              Home
-            </Link>
-            <Link
-              className="text-xl text-white hover:text-primary transition-colors"
-              to="/characters"
-            >
-              Characters
-            </Link>
-            <Link
-              className="text-xl text-white hover:text-primary transition-colors"
-              to="/comics"
-            >
-              Comics
-            </Link>
-            {userCookies ? (
-              <div
-                onClick={() => {
-                  Cookies.remove("user");
-                  setUserCookies(null);
+          <nav className="mr-5 hidden items-center gap-10 md:flex">
+            <div className="flex gap-4">
+              {menuItems
+                .filter((item) => {
+                  if (!tokenCookies) {
+                    return !item.isPrivate;
+                  }
+                  return item;
+                })
+                .map((item) => {
+                  return (
+                    <Link
+                      className={clsx(
+                        "text-xl text-white hover:text-primary transition-colors",
+                        {
+                          "text-primary": pathname === item.href,
+                        }
+                      )}
+                      key={item.label}
+                      to={item.href}
+                    >
+                      {item.label}
+                    </Link>
+                  );
+                })}
+            </div>
 
-                  navigate("/");
-                }}
-                className=" cursor-pointer text-xl text-white hover:text-primary transition-colors"
-              >
-                Logout
-              </div>
-            ) : (
-              <>
-                <Link
-                  className="text-xl text-white hover:text-primary transition-colors"
-                  to={"/signup"}
-                >
-                  Signup
-                </Link>
+            <div className="flex gap-4">
+              {tokenCookies ? (
                 <div
                   onClick={() => {
-                    setOpenModal(true);
+                    Cookies.remove("token");
+                    setTokenCookies(null);
+
+                    navigate("/");
                   }}
                   className=" cursor-pointer text-xl text-white hover:text-primary transition-colors"
                 >
-                  Login
+                  Logout
                 </div>
-              </>
-            )}
+              ) : (
+                <>
+                  <Link
+                    className={clsx(
+                      "text-xl text-white hover:text-primary transition-colors",
+                      {
+                        "text-primary": pathname === "/signup",
+                      }
+                    )}
+                    to={"/signup"}
+                  >
+                    Signup
+                  </Link>
+                  <div
+                    onClick={() => {
+                      setOpenModal(true);
+                    }}
+                    className=" cursor-pointer text-xl text-white hover:text-primary transition-colors"
+                  >
+                    Login
+                  </div>
+                </>
+              )}
+            </div>
           </nav>
         </div>
       </header>
