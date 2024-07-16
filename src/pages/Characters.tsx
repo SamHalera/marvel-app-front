@@ -6,8 +6,9 @@ import SearchBar from "../components/SearchBar";
 import Loader from "../components/Loader";
 import Pagination from "../components/Pagination";
 import CharacterComponent from "../components/Character/CharacterComponent";
-import { useUserCookiesStore } from "../stores/userCookies";
+import { useTokenCookiesStore } from "../stores/tokenCookies";
 import Cookies from "js-cookie";
+import { Navigate } from "react-router-dom";
 
 const Characters = () => {
   const [data, setData] = useState<CharactersType>();
@@ -16,10 +17,11 @@ const Characters = () => {
   const [page, setPage] = useState<number>(1);
   const [nbPages, setNbPages] = useState<number>(0);
   const [skip, setSkip] = useState<number>(1);
+  const [addedToFavorites, setAddedToFavorites] = useState(false);
 
   const [filterValue, setFilterValue] = useState<string>("");
 
-  const { userCookies } = useUserCookiesStore();
+  const tokenCookies = Cookies.get("token");
   const handleSearch = useDebouncedCallback((value: string) => {
     setFilterValue(value);
   }, 500);
@@ -37,15 +39,22 @@ const Characters = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const cookieUser = Cookies.get("user");
-      const user = cookieUser ? JSON.parse(cookieUser) : null;
-
-      const emailQuery = user ? `&email=${user.email}` : "";
+      // const emailQuery = user ? `&email=${user.email}` : "";
       // title variable will be useless
 
-      const response = await fetch(
-        `${baseAPIUrl}/characters?name=${name}${emailQuery}&skip=${skip}`
-      );
+      const bodyForQuery = {
+        name,
+        token: tokenCookies,
+        skip,
+      };
+      const response = await fetch(`${baseAPIUrl}/characters`, {
+        method: "POST",
+        body: JSON.stringify(bodyForQuery),
+        headers: {
+          Authorization: `Bearer ${tokenCookies}`,
+          "Content-Type": "application/json",
+        },
+      });
       const data = await response.json();
 
       setData(data);
@@ -53,8 +62,10 @@ const Characters = () => {
       setIsLoading(false);
     };
     fetchData();
-  }, []);
-  return (
+  }, [addedToFavorites]);
+  return !tokenCookies ? (
+    <Navigate to={"/"} />
+  ) : (
     <main className=" mt-16">
       <section className="bg-img mb-8  h-[50vh] bg-cover bg-scroll bg-no-repeat md:bg-fixed">
         <div className="overlay bg flex h-[50vh] w-full flex-col items-center justify-center bg-black bg-opacity-80 p-4">
@@ -80,11 +91,8 @@ const Characters = () => {
                       <CharacterComponent
                         key={result._id}
                         character={result}
-                        // userCookies={userCookies}
-                        // handleAddFavorite={handleAddFavorite}
-                        // handleRemoveFavorite={handleRemoveFavorite}
-                        // openModal={openModal}
-                        // truncateStr={truncateStr}
+                        addedToFavorites={addedToFavorites}
+                        setAddedToFavorites={setAddedToFavorites}
                       />
                     );
                   })}

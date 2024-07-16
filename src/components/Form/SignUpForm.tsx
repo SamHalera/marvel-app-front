@@ -6,8 +6,9 @@ import { useNavigate } from "react-router-dom";
 
 import { useToastStore } from "../../stores/toast";
 import ModalLogin from "./ModalLogin";
-import { useUserCookiesStore } from "../../stores/userCookies";
-import { createUserCookies } from "../../libs/utils";
+import { useTokenCookiesStore } from "../../stores/tokenCookies";
+import { createTokenCookies } from "../../libs/utils";
+import { useOpenModalStore } from "../../stores/openModal";
 
 export type SignUpFormValues = {
   username: string;
@@ -20,10 +21,10 @@ const SignUpForm = () => {
   const [errorUsername, setErrorUsername] = useState<string>("");
   const [errorEmail, setErrorEmail] = useState<string>("");
   const [errorPass, setErrorPass] = useState<string>("");
-  const [openModal, setOpenModal] = useState<boolean>(false);
+  const { openModal, setOpenModal } = useOpenModalStore();
 
   const { setSuccessMessage } = useToastStore();
-  const { setUserCookies } = useUserCookiesStore();
+  const { setTokenCookies } = useTokenCookiesStore();
 
   const {
     register,
@@ -47,9 +48,9 @@ const SignUpForm = () => {
       const data = await response.json();
 
       if (data.token) {
-        const cookies = createUserCookies(data);
+        const cookies = createTokenCookies(data.token);
 
-        cookies && setUserCookies(JSON.parse(cookies));
+        cookies && setTokenCookies(cookies);
 
         setSuccessMessage(
           "User has been created! Welcome to the marvelous world!"
@@ -70,7 +71,6 @@ const SignUpForm = () => {
   };
   return (
     <>
-      <ModalLogin openModal={openModal} setOpenModal={setOpenModal} />
       <div className="form-wrapper flex h-auto w-full flex-col gap-4 items-center justify-center rounded-lg bg-black bg-opacity-60 pb-8 md:m-auto md:w-2/3 lg:h-3/4">
         <form
           action="post"

@@ -7,6 +7,8 @@ import ComicComponent from "../components/Comic/ComicComponent";
 import Pagination from "../components/Pagination";
 import SearchBar from "../components/SearchBar";
 import { useDebouncedCallback } from "use-debounce";
+import { Navigate } from "react-router-dom";
+import Cookies from "js-cookie";
 
 const Comics = () => {
   const [data, setData] = useState<ComicsType>();
@@ -16,13 +18,15 @@ const Comics = () => {
   const [nbPages, setNbPages] = useState<number>(0);
   const [skip, setSkip] = useState<number>(1);
   const [filterValue, setFilterValue] = useState<string>("");
+  const [addedToFavorites, setAddedToFavorites] = useState(false);
 
+  const tokenCookies = Cookies.get("token");
   const handleSearch = useDebouncedCallback((value: string) => {
     setFilterValue(value);
   }, 500);
 
   const dataFiltered = data
-    ? data.results.filter((item) => {
+    ? data?.results.filter((item) => {
         if (filterValue) {
           return item.title
             .toLowerCase()
@@ -37,11 +41,19 @@ const Comics = () => {
       // const emailQuery = user ? `&email=${user.email}` : "";
       // title variable will be useless
 
-      const emailQuery = "";
-
-      const response = await fetch(
-        `${baseAPIUrl}/comics?title=${title}${emailQuery}&skip=${skip}`
-      );
+      const bodyForQuery = {
+        title,
+        token: tokenCookies,
+        skip,
+      };
+      const response = await fetch(`${baseAPIUrl}/comics`, {
+        method: "POST",
+        body: JSON.stringify(bodyForQuery),
+        headers: {
+          Authorization: `Bearer ${tokenCookies}`,
+          "Content-Type": "application/json",
+        },
+      });
       const data = await response.json();
 
       setData(data);
@@ -49,8 +61,10 @@ const Comics = () => {
       setIsLoading(false);
     };
     fetchData();
-  }, []);
-  return (
+  }, [addedToFavorites]);
+  return !tokenCookies ? (
+    <Navigate to={"/"} />
+  ) : (
     <main className="comics-main mt-24">
       <section className="bg-comics mb-8  h-[50vh] bg-cover bg-scroll bg-no-repeat md:bg-fixed">
         <div className="overlay bg flex h-[50vh] w-full flex-col items-center justify-center bg-black bg-opacity-80 p-4">
@@ -79,10 +93,8 @@ const Comics = () => {
                       <ComicComponent
                         key={result._id}
                         comic={result}
-                        // userCookies={userCookies}
-                        // handleAddFavorite={handleAddFavorite}
-                        // handleRemoveFavorite={handleRemoveFavorite}
-                        // openModal={openModal}
+                        addedToFavorites={addedToFavorites}
+                        setAddedToFavorites={setAddedToFavorites}
                       />
                     );
                   })}

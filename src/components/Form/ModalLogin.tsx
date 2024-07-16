@@ -1,13 +1,10 @@
-import React, { SetStateAction } from "react";
 import LoginForm from "./LoginForm";
+import { useOpenModalStore } from "../../stores/openModal";
 
-const ModalLogin = ({
-  openModal,
-  setOpenModal,
-}: {
-  openModal: boolean;
-  setOpenModal: React.Dispatch<SetStateAction<boolean>>;
-}) => {
+const ModalLogin = () => {
+  const { openModal, setOpenModal } = useOpenModalStore();
+  console.log(openModal);
+
   return (
     <>
       <dialog
@@ -18,7 +15,7 @@ const ModalLogin = ({
         className=" modal z-50 bg-slate-900/90 w-full h-screen absolute left-0 top-0 bottom-0 right-0 p-20"
       >
         <div className="modal-box login-wrapper relative h-full">
-          <LoginForm setOpenModal={setOpenModal} />
+          <LoginForm />
           <div
             className="btn rounded-none absolute right-6 bottom-6"
             onClick={() => {

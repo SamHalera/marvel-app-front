@@ -12,20 +12,25 @@ import Comic from "./pages/Comic";
 import Character from "./pages/Character";
 import ToastCaller from "./components/ToastCaller";
 import Login from "./Login";
-import { useUserCookiesStore } from "./stores/userCookies";
+import { useTokenCookiesStore } from "./stores/tokenCookies";
 import Cookies from "js-cookie";
+import { useOpenModalStore } from "./stores/openModal";
+import ModalLogin from "./components/Form/ModalLogin";
 
 function App() {
-  const { setUserCookies } = useUserCookiesStore();
+  const { setTokenCookies } = useTokenCookiesStore();
+  const { openModal, setOpenModal } = useOpenModalStore();
 
   useEffect(() => {
-    const cookies = Cookies.get("user");
+    const cookies = Cookies.get("token");
+    console.log(cookies);
 
-    cookies && setUserCookies(JSON.parse(cookies));
+    cookies && setTokenCookies(cookies);
   }, []);
   return (
     <>
       <Router>
+        {openModal && <ModalLogin />}
         <ToastCaller />
         <Header />
         <Routes>

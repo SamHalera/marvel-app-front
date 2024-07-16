@@ -1,12 +1,12 @@
 import React from "react";
 import SignUpForm from "../components/Form/SignUpForm";
-import { useUserCookiesStore } from "../stores/userCookies";
+import { useTokenCookiesStore } from "../stores/tokenCookies";
 import { Navigate } from "react-router-dom";
 
 const SignUp = () => {
-  const { userCookies } = useUserCookiesStore();
+  const { tokenCookies } = useTokenCookiesStore();
 
-  return userCookies ? (
+  return tokenCookies ? (
     <Navigate to={"/"} />
   ) : (
     <main className="form-container mb-2 h-screen bg-cover bg-scroll bg-no-repeat py-10 md:bg-fixed">

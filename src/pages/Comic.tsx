@@ -1,23 +1,38 @@
 import React, { useEffect, useState } from "react";
 import { ComicItemArray } from "../types";
-import { Link, useParams } from "react-router-dom";
+import { Link, Navigate, useParams } from "react-router-dom";
 import Loader from "../components/Loader";
 import { baseAPIUrl } from "../api";
 import { ArrowLeftIcon } from "@heroicons/react/24/solid";
 import FavoritesComponent from "../components/FavoritesComponent";
+import Cookies from "js-cookie";
 
 const Comic = () => {
   const [data, setData] = useState<ComicItemArray>();
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [addedToFavorites, setAddedToFavorites] = useState(false);
+  const tokenCookies = Cookies.get("token");
 
   const { id } = useParams();
 
   useEffect(() => {
     const fetchData = async () => {
+      const tokenCookies = Cookies.get("token");
+      const body = {
+        id,
+      };
       try {
         const response = await fetch(
           // `${baseAPIUrl}/comic/${id}?userId=${user._id}`,
-          `${baseAPIUrl}/comic/${id}`
+          `${baseAPIUrl}/comic`,
+          {
+            method: "POST",
+            body: JSON.stringify(body),
+            headers: {
+              Authorization: `Bearer ${tokenCookies}`,
+              "Content-Type": "application/json",
+            },
+          }
         );
 
         const data = await response.json();
@@ -29,7 +44,7 @@ const Comic = () => {
       }
     };
     fetchData();
-  }, []);
+  }, [addedToFavorites]);
 
   return isLoading ? (
     <div className="mt-20">
@@ -41,26 +56,31 @@ const Comic = () => {
         <ArrowLeftIcon className="size-5" />
         Back to the list
       </Link>
-      <h1 className="mb-8 text-center text-3xl font-bold text-white lg:mb-10">
-        {data?.title}
-      </h1>
+      <div className="flex flex-col gap-3 items-center">
+        <h1 className="mb-8 text-center text-3xl font-bold text-white lg:mb-10">
+          {data?.title}
+        </h1>
+      </div>
       <div className="flex flex-col items-center gap-8 lg:flex-row">
         <img
           className="mb-2 w-64 lg:w-96"
           src={`${data?.thumbnail.path}.${data?.thumbnail.extension}`}
           alt=""
         />
-        <div className="px-10">
-          <p className="mb-9  text-xl leading-8 text-white lg:w-2/4">
-            {data?.description}
-          </p>
+
+        <div className="px-10 flex flex-col gap-4">
           {data && (
             <FavoritesComponent
               itemId={data._id}
               label="comic"
               isFavorite={data?.isFavorite ?? false}
+              addedToFavorites={addedToFavorites}
+              setAddedToFavorites={setAddedToFavorites}
             />
           )}
+          <p className="mb-9  text-xl leading-8 text-white lg:w-2/4">
+            {data?.description}
+          </p>
         </div>
       </div>
     </main>

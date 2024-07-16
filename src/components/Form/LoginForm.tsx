@@ -1,23 +1,23 @@
 import React, { SetStateAction, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { Navigate, redirect, useNavigate } from "react-router-dom";
 import { baseAPIUrl } from "../../api";
 import Input from "./Input";
-import { useUserCookiesStore } from "../../stores/userCookies";
-import { createUserCookies } from "../../libs/utils";
+import { useTokenCookiesStore } from "../../stores/tokenCookies";
+import { createTokenCookies } from "../../libs/utils";
+import { useOpenModalStore } from "../../stores/openModal";
 
 export type LoginFormValues = {
   email: string;
   password: string;
 };
-const LoginForm = ({
-  setOpenModal,
-}: {
-  setOpenModal: React.Dispatch<SetStateAction<boolean>>;
-}) => {
+const LoginForm = () => {
   const [errorEmail, setErrorEmail] = useState<string>("");
   const [errorPass, setErrorPass] = useState<string>("");
-  const { setUserCookies } = useUserCookiesStore();
+  const { setTokenCookies } = useTokenCookiesStore();
+  const { openModal, setOpenModal } = useOpenModalStore();
+  console.log(openModal);
+  // if (!openModal) return;
 
   const {
     register,
@@ -41,11 +41,11 @@ const LoginForm = ({
       const data = await response.json();
 
       if (data.token) {
-        const cookies = createUserCookies(data);
+        const cookies = createTokenCookies(data.token);
 
-        cookies && setUserCookies(JSON.parse(cookies));
+        cookies && setTokenCookies(cookies);
         setOpenModal(false);
-        navigate("/");
+        redirect("/");
         reset();
       }
     } catch (error) {}
@@ -86,6 +86,7 @@ const LoginForm = ({
             onClick={() => {
               setOpenModal(false);
               navigate("/signup");
+              // Navigate({ to: "/signup" });
             }}
             className="hover:text-primary transition-colors text-white cursor-pointer"
           >

@@ -31,8 +31,12 @@ export const handleAddFavorite = async (
 };
 
 export const handleRemoveFavorite = async (id: string, target: string) => {
+  console.log("remove");
   try {
-    const response = await fetch(`${baseAPIUrl}/favorites/${id}`);
+    const response = await fetch(`${baseAPIUrl}/favorites/${id}`, {
+      method: "DELETE",
+      cache: "no-cache",
+    });
   } catch (error) {
     console.error(error, "<== message error");
   }

@@ -4,9 +4,9 @@ export const truncateStr = (str: string, maxLength: number) => {
   return str.length > maxLength ? str.slice(0, maxLength) + "..." : str;
 };
 
-export const createUserCookies = (data: UserInterface) => {
-  const user = data;
+export const createTokenCookies = (token: string) => {
+  // const user = data;
 
-  Cookies.set("user", JSON.stringify(user), { expires: 15 });
-  return Cookies.get("user");
+  Cookies.set("token", token, { expires: 15 });
+  return Cookies.get("token");
 };

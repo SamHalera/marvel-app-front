@@ -2,31 +2,51 @@ import { HeartIcon } from "@heroicons/react/24/solid";
 import {
   handleAddFavorite,
   handleRemoveFavorite,
-} from "../libs/cookiesHandler";
+} from "../libs/favoritesHandler";
+import { useTokenCookiesStore } from "../stores/tokenCookies";
+import { useState } from "react";
+import LoaderSingleAction from "./LoaderSingleAction";
 
 const FavoritesComponent = ({
   label,
   itemId,
   isFavorite,
+  setAddedToFavorites,
+  addedToFavorites,
 }: {
   label: string;
   itemId: string;
   isFavorite: boolean;
+  setAddedToFavorites: React.Dispatch<React.SetStateAction<boolean>>;
+  addedToFavorites: boolean;
 }) => {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const { tokenCookies } = useTokenCookiesStore();
+  console.log(label);
   return (
-    <div className="favorites z-10">
-      {isFavorite ? (
+    <div className="favorites z-10 h-10 flex">
+      {isLoading ? (
+        <LoaderSingleAction />
+      ) : isFavorite ? (
         <HeartIcon
           onClick={() => {
-            handleRemoveFavorite(itemId, "character");
+            setIsLoading(true);
+
+            handleRemoveFavorite(itemId, label);
+            setAddedToFavorites(!addedToFavorites);
+            setIsLoading(false);
           }}
           className="size-6 cursor-pointer text-2xl text-[#ed1d24]"
         />
       ) : (
-        <div className="flex gap-2 items-center">
+        <div className="flex  gap-2 items-center">
           <HeartIcon
             onClick={() => {
-              // handleAddFavorite(itemId, "character")
+              setIsLoading(true);
+
+              tokenCookies && handleAddFavorite(itemId, tokenCookies, label);
+              setAddedToFavorites(!addedToFavorites);
+              setIsLoading(false);
             }}
             className="size-6 cursor-pointer text-2xl"
           />
