@@ -1,14 +1,13 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import Input from "./Input";
 import { baseAPIUrl } from "../../api";
-import { Link, Navigate, redirect, useNavigate } from "react-router-dom";
-import { toast } from "sonner";
+import { useNavigate } from "react-router-dom";
+
 import { useToastStore } from "../../stores/toast";
 import ModalLogin from "./ModalLogin";
 import { useUserCookiesStore } from "../../stores/userCookies";
 import { createUserCookies } from "../../libs/utils";
-import { UserInterface } from "../../types";
 
 export type SignUpFormValues = {
   username: string;
@@ -23,14 +22,14 @@ const SignUpForm = () => {
   const [errorPass, setErrorPass] = useState<string>("");
   const [openModal, setOpenModal] = useState<boolean>(false);
 
-  const { setErrorMessage, setSuccessMessage } = useToastStore();
-  const { userCookies, setUserCookies } = useUserCookiesStore();
+  const { setSuccessMessage } = useToastStore();
+  const { setUserCookies } = useUserCookiesStore();
 
   const {
     register,
     handleSubmit,
     reset,
-    formState: { errors, isDirty },
+    formState: { errors },
   } = useForm<SignUpFormValues>();
 
   const navigate = useNavigate();

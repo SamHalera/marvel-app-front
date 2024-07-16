@@ -16,7 +16,7 @@ import { useUserCookiesStore } from "./stores/userCookies";
 import Cookies from "js-cookie";
 
 function App() {
-  const { userCookies, setUserCookies } = useUserCookiesStore();
+  const { setUserCookies } = useUserCookiesStore();
 
   useEffect(() => {
     const cookies = Cookies.get("user");

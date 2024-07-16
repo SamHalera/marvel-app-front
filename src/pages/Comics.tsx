@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Loader from "../components/Loader";
 import { baseAPIUrl } from "../api";
 import { ComicsType } from "../types";
-import { count } from "console";
+
 import ComicComponent from "../components/Comic/ComicComponent";
 import Pagination from "../components/Pagination";
 import SearchBar from "../components/SearchBar";
@@ -15,7 +15,6 @@ const Comics = () => {
   const [page, setPage] = useState<number>(1);
   const [nbPages, setNbPages] = useState<number>(0);
   const [skip, setSkip] = useState<number>(1);
-  const [isOpen, setIsOpen] = useState<boolean>(false);
   const [filterValue, setFilterValue] = useState<string>("");
 
   const handleSearch = useDebouncedCallback((value: string) => {

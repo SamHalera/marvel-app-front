@@ -2,10 +2,9 @@ import React from "react";
 import SignUpForm from "../components/Form/SignUpForm";
 import { useUserCookiesStore } from "../stores/userCookies";
 import { Navigate } from "react-router-dom";
-import Cookies from "js-cookie";
 
 const SignUp = () => {
-  const { userCookies, setUserCookies } = useUserCookiesStore();
+  const { userCookies } = useUserCookiesStore();
 
   return userCookies ? (
     <Navigate to={"/"} />

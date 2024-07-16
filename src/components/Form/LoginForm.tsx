@@ -15,17 +15,15 @@ const LoginForm = ({
 }: {
   setOpenModal: React.Dispatch<SetStateAction<boolean>>;
 }) => {
-  const [isError, setIsError] = useState<boolean>(false);
-
   const [errorEmail, setErrorEmail] = useState<string>("");
   const [errorPass, setErrorPass] = useState<string>("");
-  const { userCookies, setUserCookies } = useUserCookiesStore();
+  const { setUserCookies } = useUserCookiesStore();
 
   const {
     register,
     handleSubmit,
     reset,
-    formState: { errors, isDirty },
+    formState: { errors },
   } = useForm<LoginFormValues>();
 
   const navigate = useNavigate();

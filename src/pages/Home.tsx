@@ -8,7 +8,7 @@ import ItemCarouselHome from "../components/ItemCarouselHome";
 const Home = () => {
   const [characters, setChararcters] = useState<CharactersType | null>();
   const [comics, setComics] = useState<ComicsType | null>();
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+
   const navigate = useNavigate();
 
   const arrayComics: ComicItemArray[] = [];

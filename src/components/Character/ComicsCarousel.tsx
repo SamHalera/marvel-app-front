@@ -1,6 +1,5 @@
-import React from "react";
 import ItemCarousel from "../ItemCarousel";
-import { CharacterDataType, CharacterItemArray } from "../../types";
+import { CharacterDataType } from "../../types";
 
 const ComicsCarousel = ({ data }: { data: CharacterDataType }) => {
   return (

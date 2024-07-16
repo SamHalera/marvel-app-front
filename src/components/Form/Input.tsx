@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { FieldError, UseFormRegister } from "react-hook-form";
-import { SignUpFormValues } from "./SignUpForm";
+
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/solid";
 
 const Input = ({
