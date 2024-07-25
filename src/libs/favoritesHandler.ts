@@ -6,7 +6,7 @@ export const handleAddFavorite = async (
   target: string
 ) => {
   try {
-    console.log("Hello favorite");
+    console.log("Hello favorite", target);
 
     const bodyForQuery = {
       itemId: id,

@@ -6,6 +6,7 @@ import Input from "./Input";
 import { useTokenCookiesStore } from "../../stores/tokenCookies";
 import { createTokenCookies } from "../../libs/utils";
 import { useOpenModalStore } from "../../stores/openModal";
+import { useToastStore } from "../../stores/toast";
 
 export type LoginFormValues = {
   email: string;
@@ -16,6 +17,7 @@ const LoginForm = () => {
   const [errorPass, setErrorPass] = useState<string>("");
   const { setTokenCookies } = useTokenCookiesStore();
   const { openModal, setOpenModal } = useOpenModalStore();
+  const { setErrorMessage } = useToastStore();
   console.log(openModal);
   // if (!openModal) return;
 
@@ -40,6 +42,8 @@ const LoginForm = () => {
       });
       const data = await response.json();
 
+      if (data?.message === "Unauthorized!")
+        setErrorMessage("Invalid credentials!");
       if (data.token) {
         const cookies = createTokenCookies(data.token);
 

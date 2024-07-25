@@ -24,10 +24,10 @@ const Comic = () => {
       try {
         const response = await fetch(
           // `${baseAPIUrl}/comic/${id}?userId=${user._id}`,
-          `${baseAPIUrl}/comic`,
+          `${baseAPIUrl}/comic/${id}`,
           {
-            method: "POST",
-            body: JSON.stringify(body),
+            method: "GET",
+            // body: JSON.stringify(body),
             headers: {
               Authorization: `Bearer ${tokenCookies}`,
               "Content-Type": "application/json",

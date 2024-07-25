@@ -21,10 +21,11 @@ const Comics = () => {
   const [addedToFavorites, setAddedToFavorites] = useState(false);
 
   const tokenCookies = Cookies.get("token");
+  // if (!tokenCookies) return Navigate({ to: "/" });
+
   const handleSearch = useDebouncedCallback((value: string) => {
     setFilterValue(value);
   }, 500);
-
   const dataFiltered = data
     ? data?.results.filter((item) => {
         if (filterValue) {
@@ -60,7 +61,8 @@ const Comics = () => {
       setNbPages(Math.ceil(data.count / 100));
       setIsLoading(false);
     };
-    fetchData();
+
+    tokenCookies && fetchData();
   }, [addedToFavorites]);
   return !tokenCookies ? (
     <Navigate to={"/"} />

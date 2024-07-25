@@ -28,18 +28,20 @@ const FavoritesComponent = ({
       {isLoading ? (
         <LoaderSingleAction />
       ) : isFavorite ? (
-        <HeartIcon
-          onClick={() => {
-            setIsLoading(true);
+        <div className="flex gap-2 items-center">
+          <HeartIcon
+            onClick={() => {
+              setIsLoading(true);
 
-            handleRemoveFavorite(itemId, label);
-            setAddedToFavorites(!addedToFavorites);
-            setIsLoading(false);
-          }}
-          className="size-6 cursor-pointer text-2xl text-[#ed1d24]"
-        />
+              handleRemoveFavorite(itemId, label);
+              setAddedToFavorites(!addedToFavorites);
+              setIsLoading(false);
+            }}
+            className="size-6 cursor-pointer text-2xl text-[#ed1d24]"
+          />
+        </div>
       ) : (
-        <div className="flex  gap-2 items-center">
+        <div className="flex gap-2 items-center">
           <HeartIcon
             onClick={() => {
               setIsLoading(true);

@@ -8,7 +8,7 @@ import Pagination from "../components/Pagination";
 import CharacterComponent from "../components/Character/CharacterComponent";
 import { useTokenCookiesStore } from "../stores/tokenCookies";
 import Cookies from "js-cookie";
-import { Navigate } from "react-router-dom";
+import { Navigate, redirect } from "react-router-dom";
 
 const Characters = () => {
   const [data, setData] = useState<CharactersType>();
@@ -22,6 +22,7 @@ const Characters = () => {
   const [filterValue, setFilterValue] = useState<string>("");
 
   const tokenCookies = Cookies.get("token");
+
   const handleSearch = useDebouncedCallback((value: string) => {
     setFilterValue(value);
   }, 500);
@@ -55,13 +56,15 @@ const Characters = () => {
           "Content-Type": "application/json",
         },
       });
-      const data = await response.json();
+
+      const { data } = await response.json();
 
       setData(data);
       setNbPages(Math.ceil(data.count / 100));
       setIsLoading(false);
     };
-    fetchData();
+
+    tokenCookies && fetchData();
   }, [addedToFavorites]);
   return !tokenCookies ? (
     <Navigate to={"/"} />

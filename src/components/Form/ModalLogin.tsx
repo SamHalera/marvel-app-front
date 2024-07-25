@@ -12,7 +12,8 @@ const ModalLogin = () => {
         onClose={() => {
           setOpenModal(false);
         }}
-        className=" modal z-50 bg-slate-900/90 w-full h-screen absolute left-0 top-0 bottom-0 right-0 p-20"
+        //-full h-screen absolute left-0 top-0 bottom-0 right-0
+        className=" modal z-50 bg-slate-900/90 w p-20"
       >
         <div className="modal-box login-wrapper relative h-full">
           <LoginForm />
