@@ -16,6 +16,7 @@ import { useTokenCookiesStore } from "./stores/tokenCookies";
 import Cookies from "js-cookie";
 import { useOpenModalStore } from "./stores/openModal";
 import ModalLogin from "./components/Form/ModalLogin";
+import Profile from "./pages/Profile";
 
 function App() {
   const { setTokenCookies } = useTokenCookiesStore();
@@ -36,6 +37,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />}></Route>
           <Route path="/comics" element={<Comics />}></Route>
+          <Route path="/profile" element={<Profile />}></Route>
           <Route path="/comic/:id" element={<Comic />}></Route>
           <Route path="/characters" element={<Characters />}></Route>
           <Route path="/character/:id" element={<Character />}></Route>

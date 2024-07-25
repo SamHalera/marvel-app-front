@@ -17,7 +17,7 @@ const Input = ({
   required: boolean;
   error: FieldError | undefined;
   errorMessage: string;
-  name: "username" | "email" | "password";
+  name: string;
   type: string;
 }) => {
   const [showPass, setShowPass] = useState<boolean>(false);
@@ -43,7 +43,7 @@ const Input = ({
           }
           className="input input-bordered w-full max-w-xs rounded-none"
         />
-        {name === "password" && (
+        {type === "password" && (
           <>
             {!showPass ? (
               <EyeIcon

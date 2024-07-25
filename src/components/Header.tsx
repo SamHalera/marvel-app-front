@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { MouseEvent, useEffect, useRef, useState } from "react";
 import logo from "../assets/images/logo.svg";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import ModalLogin from "./Form/ModalLogin";
@@ -8,14 +8,15 @@ import clsx from "clsx";
 import menuItems from "../assets/data/menuItems.json";
 import { useOpenModalStore } from "../stores/openModal";
 
+import ProfileDropdown from "./Profile/ProfileDropdown";
+
 const Header = () => {
-  // const [openModal, setOpenModal] = useState<boolean>(false);
-  const { tokenCookies, setTokenCookies } = useTokenCookiesStore();
+  const [showMenu, setSwhoMenu] = useState<boolean>(false);
+  const { tokenCookies } = useTokenCookiesStore();
   const { openModal, setOpenModal } = useOpenModalStore();
   const navigate = useNavigate();
   const { pathname } = useLocation();
 
-  console.log(openModal);
   return (
     <>
       {/* {openModal && (
@@ -60,17 +61,10 @@ const Header = () => {
 
             <div className="flex gap-4">
               {tokenCookies ? (
-                <div
-                  onClick={() => {
-                    Cookies.remove("token");
-                    setTokenCookies(null);
-
-                    navigate("/");
-                  }}
-                  className=" cursor-pointer text-xl text-white hover:text-primary transition-colors"
-                >
-                  Logout
-                </div>
+                <ProfileDropdown
+                  showMenu={showMenu}
+                  setSwhoMenu={setSwhoMenu}
+                />
               ) : (
                 <>
                   <Link
