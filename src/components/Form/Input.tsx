@@ -11,6 +11,7 @@ const Input = ({
   errorMessage,
   name,
   type,
+  disabled,
 }: {
   label: string;
   register: UseFormRegister<any>;
@@ -19,6 +20,7 @@ const Input = ({
   errorMessage: string;
   name: string;
   type: string;
+  disabled?: boolean;
 }) => {
   const [showPass, setShowPass] = useState<boolean>(false);
   if (error?.type === "required") {
@@ -42,6 +44,7 @@ const Input = ({
             type === "password" ? `${showPass ? "text" : "password"}` : type
           }
           className="input input-bordered w-full max-w-xs rounded-none"
+          disabled={disabled}
         />
         {type === "password" && (
           <>

@@ -6,12 +6,15 @@ import clsx from "clsx";
 import ItemCarouselHome from "../components/ItemCarouselHome";
 import ModalLogin from "../components/Form/ModalLogin";
 import { useOpenModalStore } from "../stores/openModal";
+import Cookies from "js-cookie";
 
 const Home = () => {
   const [characters, setChararcters] = useState<CharactersType | null>();
   const [comics, setComics] = useState<ComicsType | null>();
   const { openModal, setOpenModal } = useOpenModalStore();
 
+  const tokenCookies = Cookies.get("token");
+  console.log(tokenCookies);
   const navigate = useNavigate();
 
   const arrayComics: ComicItemArray[] = [];
@@ -72,8 +75,11 @@ const Home = () => {
             </h2>
             <button
               onClick={() => {
-                navigate("/comics");
-                setOpenModal(true);
+                if (tokenCookies) {
+                  navigate("/comics");
+                } else {
+                  setOpenModal(true);
+                }
               }}
               className="btn btn-marvel  self-end"
             >
@@ -116,8 +122,12 @@ const Home = () => {
 
                 <button
                   onClick={() => {
-                    navigate("/characters");
-                    setOpenModal(true);
+                    if (tokenCookies) {
+                      navigate("/characters");
+                    } else {
+                      // navigate("/");
+                      setOpenModal(true);
+                    }
                   }}
                   className="btn btn-marvel"
                 >

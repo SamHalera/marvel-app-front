@@ -40,6 +40,12 @@ const ProfileDropdown = ({
         )}
       >
         <div className="flex flex-col gap-4">
+          <Link
+            className="cursor-pointer text-white hover:bg-red-800 transition-colors px-4 py-2 w-full"
+            to={"/profile"}
+          >
+            Profile
+          </Link>
           <div
             onClick={() => {
               Cookies.remove("token");
@@ -51,13 +57,6 @@ const ProfileDropdown = ({
           >
             Logout
           </div>
-
-          <Link
-            className="cursor-pointer text-white hover:bg-red-800 transition-colors px-4 py-2 w-full"
-            to={"/profile"}
-          >
-            Profile
-          </Link>
         </div>
       </div>
 
