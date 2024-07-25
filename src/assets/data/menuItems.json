@@ -1,0 +1,17 @@
+[
+  {
+    "label": "Home",
+    "href": "/",
+    "isPrivate": false
+  },
+  {
+    "label": "Characters",
+    "href": "/characters",
+    "isPrivate": true
+  },
+  {
+    "label": "Comics",
+    "href": "/comics",
+    "isPrivate": true
+  }
+]
