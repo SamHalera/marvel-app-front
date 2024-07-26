@@ -81,13 +81,13 @@ const Home = () => {
                   setOpenModal(true);
                 }
               }}
-              className="btn btn-marvel  self-end"
+              className="btn btn-marvel lg:self-end"
             >
               DISCOVER
             </button>
           </div>
           <div className="left-[300px] top-[200px] mx-auto lg:absolute">
-            <div className="relative flex flex-col items-center justify-center md:flex-row">
+            <div className="relative flex flex-col items-center justify-center md:flex-row gap-4">
               {arrayComics.length > 0 &&
                 arrayComics.map((item: ComicItemArray, index: number) => {
                   return (

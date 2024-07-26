@@ -17,17 +17,38 @@ import Cookies from "js-cookie";
 import { useOpenModalStore } from "./stores/openModal";
 import ModalLogin from "./components/Form/ModalLogin";
 import Profile from "./pages/Profile";
+import { useCurrenUserStore } from "./stores/currentUser";
+import { baseAPIUrl } from "./api";
+import Favorites from "./pages/Favorites";
 
 function App() {
   const { setTokenCookies } = useTokenCookiesStore();
   const { openModal, setOpenModal } = useOpenModalStore();
+  const {
+    currentAvatar,
+    setCurrentAvatar,
+    setCurrentEmail,
+    setCurrentUsername,
+  } = useCurrenUserStore();
 
   useEffect(() => {
     const cookies = Cookies.get("token");
-    console.log(cookies);
 
     cookies && setTokenCookies(cookies);
-  }, []);
+    const fetchCurrentUser = async () => {
+      const response = await fetch(`${baseAPIUrl}/user/profile`, {
+        headers: {
+          Authorization: `Bearer ${cookies}`,
+        },
+      });
+
+      const data = await response.json();
+      setCurrentEmail(data.email);
+      setCurrentUsername(data.username);
+      setCurrentAvatar(data.avatar);
+    };
+    !currentAvatar && fetchCurrentUser();
+  }, [currentAvatar]);
   return (
     <>
       <Router>
@@ -38,6 +59,7 @@ function App() {
           <Route path="/" element={<Home />}></Route>
           <Route path="/comics" element={<Comics />}></Route>
           <Route path="/profile" element={<Profile />}></Route>
+          <Route path="/favorites" element={<Favorites />}></Route>
           <Route path="/comic/:id" element={<Comic />}></Route>
           <Route path="/characters" element={<Characters />}></Route>
           <Route path="/character/:id" element={<Character />}></Route>

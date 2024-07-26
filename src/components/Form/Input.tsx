@@ -27,7 +27,7 @@ const Input = ({
     errorMessage = "Champs obligatoire";
   }
   return (
-    <label className="form-control w-full max-w-xs">
+    <label className="form-control w-full">
       <div className="label">
         <span className="label-text text-white text-xl">{label}</span>
         {errorMessage && (
@@ -43,7 +43,7 @@ const Input = ({
           type={
             type === "password" ? `${showPass ? "text" : "password"}` : type
           }
-          className="input input-bordered w-full max-w-xs rounded-none"
+          className="input input-bordered w-full  rounded-none"
           disabled={disabled}
         />
         {type === "password" && (
