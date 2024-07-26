@@ -8,6 +8,7 @@ import { baseAPIUrl } from "../api";
 const Profile = () => {
   const [userData, setUserData] = useState<UserInterface>();
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
   const navigate = useNavigate();
   const tokenCookies = Cookies.get("token");
   !tokenCookies && navigate("/");
@@ -21,14 +22,14 @@ const Profile = () => {
         });
 
         const data = await response.json();
-        console.log(data);
+
         setUserData(data);
       } catch (error) {
         console.error(error);
       }
     };
     fetchUserData();
-  }, []);
+  }, [isSubmitted]);
   return !tokenCookies ? (
     <Navigate to={"/"} />
   ) : (
@@ -39,7 +40,9 @@ const Profile = () => {
 
       <div className="mx-auto mt-6 w-4/5">
         <div className="">
-          {userData && <FormProfile userData={userData} />}
+          {userData && (
+            <FormProfile userData={userData} setIsSubmitted={setIsSubmitted} />
+          )}
         </div>
       </div>
     </div>

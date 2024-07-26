@@ -17,17 +17,30 @@ import Cookies from "js-cookie";
 import { useOpenModalStore } from "./stores/openModal";
 import ModalLogin from "./components/Form/ModalLogin";
 import Profile from "./pages/Profile";
+import { useCurrentAvatarStore } from "./stores/currentAvatar";
+import { baseAPIUrl } from "./api";
 
 function App() {
   const { setTokenCookies } = useTokenCookiesStore();
   const { openModal, setOpenModal } = useOpenModalStore();
+  const { currentAvatar, setCurrentAvatar } = useCurrentAvatarStore();
 
   useEffect(() => {
     const cookies = Cookies.get("token");
-    console.log(cookies);
 
     cookies && setTokenCookies(cookies);
-  }, []);
+    const fetchAvatar = async () => {
+      const response = await fetch(`${baseAPIUrl}/user/avatar`, {
+        headers: {
+          Authorization: `Bearer ${cookies}`,
+        },
+      });
+
+      const data = await response.json();
+      setCurrentAvatar(data.avatar);
+    };
+    !currentAvatar && fetchAvatar();
+  }, [currentAvatar]);
   return (
     <>
       <Router>

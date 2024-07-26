@@ -4,6 +4,7 @@ import React, { SetStateAction, useEffect, useRef } from "react";
 import { useTokenCookiesStore } from "../../stores/tokenCookies";
 import { Link, useNavigate } from "react-router-dom";
 import { UserIcon } from "@heroicons/react/24/solid";
+import { useCurrentAvatarStore } from "../../stores/currentAvatar";
 
 const ProfileDropdown = ({
   showMenu,
@@ -14,6 +15,7 @@ const ProfileDropdown = ({
   setSwhoMenu: React.Dispatch<SetStateAction<boolean>>;
 }) => {
   const { setTokenCookies } = useTokenCookiesStore();
+  const { currentAvatar, setCurrentAvatar } = useCurrentAvatarStore();
   const navigate = useNavigate();
   const ref = useRef<HTMLDivElement>(null);
 
@@ -69,7 +71,13 @@ const ProfileDropdown = ({
       >
         <div className="bg-neutral text-neutral-content w-16 rounded-full hover:text-primary hover:opacity-50 duration-500">
           <span className="text-xl">
-            <UserIcon className="size-8" />
+            {currentAvatar ? (
+              <>
+                <img className="" src={currentAvatar.secure_url} />
+              </>
+            ) : (
+              <UserIcon className="size-8" />
+            )}
           </span>
         </div>
       </div>

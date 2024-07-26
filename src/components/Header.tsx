@@ -1,9 +1,9 @@
-import { MouseEvent, useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import logo from "../assets/images/logo.svg";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import ModalLogin from "./Form/ModalLogin";
+
 import { useTokenCookiesStore } from "../stores/tokenCookies";
-import Cookies from "js-cookie";
+
 import clsx from "clsx";
 import menuItems from "../assets/data/menuItems.json";
 import { useOpenModalStore } from "../stores/openModal";
@@ -14,14 +14,12 @@ const Header = () => {
   const [showMenu, setSwhoMenu] = useState<boolean>(false);
   const { tokenCookies } = useTokenCookiesStore();
   const { openModal, setOpenModal } = useOpenModalStore();
+
   const navigate = useNavigate();
   const { pathname } = useLocation();
 
   return (
     <>
-      {/* {openModal && (
-        <ModalLogin openModal={openModal} setOpenModal={setOpenModal} />
-      )} */}
       <header className="fixed top-0 z-40 flex w-full items-center justify-between px-12 py-5">
         <img
           onClick={() => {
