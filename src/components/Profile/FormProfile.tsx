@@ -8,7 +8,7 @@ import Cookies from "js-cookie";
 import { useToastStore } from "../../stores/toast";
 import ImageUpload from "./ImageUpload";
 import { useNavigate } from "react-router-dom";
-import { useCurrentAvatarStore } from "../../stores/currentAvatar";
+import { useCurrenUserStore } from "../../stores/currentUser";
 
 export type FormProfileValues = {
   picture?: string;
@@ -33,7 +33,7 @@ const FormProfile = ({
   const [errorConfirmPass, setErrorConfirmPass] = useState<string>("");
   const [errorForm, setErrorForm] = useState<string>("");
   const { setSuccessMessage } = useToastStore();
-  const { currentAvatar, setCurrentAvatar } = useCurrentAvatarStore();
+  const { currentAvatar, setCurrentAvatar } = useCurrenUserStore();
   const tokenCookies = Cookies.get("token");
 
   const navigate = useNavigate();

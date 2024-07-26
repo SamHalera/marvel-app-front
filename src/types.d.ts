@@ -1,8 +1,8 @@
 export interface UserInterface {
-  _id: string;
+  // _id: string;
   email: string;
   username: string;
-  token: string;
+  // token: string;
   avatar: CloudinaryFile;
 }
 
@@ -66,4 +66,18 @@ export interface CloudinaryFile {
   secure_url: string;
   access_mode: string;
   original_filename: string;
+}
+
+export interface FavoriteInterface {
+  _id: string;
+  label: string;
+  user: string;
+  thumbnail: {
+    path: string;
+    extension: string;
+  };
+  title?: string;
+  name?: string;
+  description: string;
+  __v: number;
 }
