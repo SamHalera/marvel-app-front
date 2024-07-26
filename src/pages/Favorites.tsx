@@ -115,9 +115,11 @@ const Favorites = () => {
                     if (favorite.user === currentEmail) {
                       if (displayFav === favorite.label) {
                         return (
-                          <div>
+                          <div
+                            key={favorite._id}
+                            className="flex flex-col items-center"
+                          >
                             <Link
-                              key={favorite._id}
                               to={`/${displayFav}/${favorite._id}`}
                               className="item m-5 flex flex-col gap-4 hover:opacity-50 items-center w-3/4"
                             >

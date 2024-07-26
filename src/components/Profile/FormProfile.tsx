@@ -112,7 +112,7 @@ const FormProfile = ({
       <h2 className=" my-6 text-center text-2xl font-bold text-white">
         {userData.username}
       </h2>
-      <div className="flex items-start justify-center gap-8">
+      <div className="flex flex-col md:flex-row md:items-start justify-center gap-8">
         <div className="flex-1">
           <ImageUpload
             userAvatar={userData.avatar}
