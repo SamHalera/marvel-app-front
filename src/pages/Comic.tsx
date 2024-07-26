@@ -52,7 +52,7 @@ const Comic = () => {
     </div>
   ) : (
     <main className="container mx-auto mb-20 mt-44 h-auto lg:h-screen">
-      <Link to={"/comics"} className="btn btn-marvel">
+      <Link to={"/comics"} className="btn btn-marvel m-4">
         <ArrowLeftIcon className="size-5" />
         Back to the list
       </Link>
