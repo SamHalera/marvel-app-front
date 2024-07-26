@@ -4,7 +4,7 @@ import React, { SetStateAction, useEffect, useRef } from "react";
 import { useTokenCookiesStore } from "../../stores/tokenCookies";
 import { Link, useNavigate } from "react-router-dom";
 import { UserIcon } from "@heroicons/react/24/solid";
-import { useCurrentAvatarStore } from "../../stores/currentAvatar";
+import { useCurrenUserStore } from "../../stores/currentUser";
 
 const ProfileDropdown = ({
   showMenu,
@@ -15,7 +15,7 @@ const ProfileDropdown = ({
   setSwhoMenu: React.Dispatch<SetStateAction<boolean>>;
 }) => {
   const { setTokenCookies } = useTokenCookiesStore();
-  const { currentAvatar, setCurrentAvatar } = useCurrentAvatarStore();
+  const { currentAvatar, setCurrentAvatar } = useCurrenUserStore();
   const navigate = useNavigate();
   const ref = useRef<HTMLDivElement>(null);
 
@@ -47,6 +47,12 @@ const ProfileDropdown = ({
             to={"/profile"}
           >
             Profile
+          </Link>
+          <Link
+            className="cursor-pointer text-white hover:bg-red-800 transition-colors px-4 py-2 w-full"
+            to={"/favorites"}
+          >
+            Favorites
           </Link>
           <div
             onClick={() => {
