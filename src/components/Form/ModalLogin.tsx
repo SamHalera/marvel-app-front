@@ -3,7 +3,6 @@ import { useOpenModalStore } from "../../stores/openModal";
 
 const ModalLogin = () => {
   const { openModal, setOpenModal } = useOpenModalStore();
-  console.log(openModal);
 
   return (
     <>

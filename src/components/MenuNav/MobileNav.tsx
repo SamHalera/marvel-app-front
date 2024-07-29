@@ -17,7 +17,7 @@ const MobileNav = ({ tokenCookies }: { tokenCookies: string | null }) => {
         onClick={() => {
           setSwhoMobileNav(!showMobileNav);
         }}
-        className="size-8"
+        className="size-8 md:hidden"
       />
 
       <nav
