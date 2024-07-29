@@ -20,7 +20,11 @@ const ImageUpload = ({
   return (
     <div className="flex flex-col gap-8 items-center">
       {userAvatar ? (
-        <img className="rounded-full w-40" src={userAvatar.secure_url} />
+        <img
+          className="rounded-full w-40"
+          src={userAvatar.secure_url}
+          alt="profile picture"
+        />
       ) : (
         <UserIcon className="size-24 rounded-full border" />
       )}
