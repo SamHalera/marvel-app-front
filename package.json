@@ -33,22 +33,10 @@
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
-    "plugins": [
-      "@typescript-eslint"
-    ],
     "extends": [
       "react-app",
-      "react-app/jest",
-      "eslint:recommended"
-    ],
-    "rules": {
-      "@typescript-eslint/no-unused-vars": [
-        "error",
-        {
-          "argsIgnorePattern": "^_"
-        }
-      ]
-    }
+      "react-app/jest"
+    ]
   },
   "browserslist": {
     "production": [
@@ -64,7 +52,7 @@
   },
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
-    "@typescript-eslint/eslint-plugin": "^7.17.0",
-    "daisyui": "^4.12.10"
+    "daisyui": "^4.12.10",
+    "eslint-config-react-app": "^7.0.1"
   }
 }
