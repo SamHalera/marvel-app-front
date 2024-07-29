@@ -1,17 +1,17 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { CharactersType, ComicItemArray, ComicsType } from "../types";
 import { baseAPIUrl } from "../api";
 import clsx from "clsx";
 import ItemCarouselHome from "../components/ItemCarouselHome";
-import ModalLogin from "../components/Form/ModalLogin";
+
 import { useOpenModalStore } from "../stores/openModal";
 import Cookies from "js-cookie";
 
 const Home = () => {
   const [characters, setChararcters] = useState<CharactersType | null>();
   const [comics, setComics] = useState<ComicsType | null>();
-  const { openModal, setOpenModal } = useOpenModalStore();
+  const { setOpenModal } = useOpenModalStore();
 
   const tokenCookies = Cookies.get("token");
 

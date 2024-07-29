@@ -15,7 +15,7 @@ const ProfileDropdown = ({
   setSwhoMenu: React.Dispatch<SetStateAction<boolean>>;
 }) => {
   const { setTokenCookies } = useTokenCookiesStore();
-  const { currentAvatar, setCurrentAvatar } = useCurrenUserStore();
+  const { currentAvatar } = useCurrenUserStore();
   const navigate = useNavigate();
   const ref = useRef<HTMLDivElement>(null);
 

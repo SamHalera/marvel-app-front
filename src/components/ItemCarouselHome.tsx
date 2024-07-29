@@ -1,12 +1,8 @@
-import React, { SetStateAction, useState } from "react";
 import { CharacterItemArray } from "../types";
 import { Link } from "react-router-dom";
 import Cookies from "js-cookie";
-import ModalLogin from "./Form/ModalLogin";
-import { useOpenModalStore } from "../stores/openModal";
 
 const ItemCarouselHome = ({ item }: { item: CharacterItemArray }) => {
-  const { openModal, setOpenModal } = useOpenModalStore();
   const tokenCookies = Cookies.get("token");
   return (
     <>

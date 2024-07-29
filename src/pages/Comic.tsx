@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { ComicItemArray } from "../types";
-import { Link, Navigate, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Loader from "../components/Loader";
 import { baseAPIUrl } from "../api";
 import { ArrowLeftIcon } from "@heroicons/react/24/solid";
@@ -11,16 +11,13 @@ const Comic = () => {
   const [data, setData] = useState<ComicItemArray>();
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [addedToFavorites, setAddedToFavorites] = useState(false);
-  const tokenCookies = Cookies.get("token");
 
   const { id } = useParams();
 
   useEffect(() => {
     const fetchData = async () => {
       const tokenCookies = Cookies.get("token");
-      const body = {
-        id,
-      };
+
       try {
         const response = await fetch(
           // `${baseAPIUrl}/comic/${id}?userId=${user._id}`,

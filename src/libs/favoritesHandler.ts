@@ -10,7 +10,7 @@ export const handleAddFavorite = async (
       itemId: id,
       label: target,
     };
-    const response = await fetch(
+    await fetch(
       `${baseAPIUrl}/favorites`,
 
       {
@@ -30,7 +30,7 @@ export const handleAddFavorite = async (
 
 export const handleRemoveFavorite = async (id: string, target: string) => {
   try {
-    const response = await fetch(`${baseAPIUrl}/favorites/${id}`, {
+    await fetch(`${baseAPIUrl}/favorites/${id}`, {
       method: "DELETE",
       cache: "no-cache",
     });

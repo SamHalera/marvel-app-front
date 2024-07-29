@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import FormProfile from "../components/Profile/FormProfile";
 import { UserInterface } from "../types";
 import Cookies from "js-cookie";
@@ -7,7 +7,7 @@ import { baseAPIUrl } from "../api";
 
 const Profile = () => {
   const [userData, setUserData] = useState<UserInterface>();
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
   const navigate = useNavigate();
   const tokenCookies = Cookies.get("token");

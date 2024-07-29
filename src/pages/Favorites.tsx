@@ -1,9 +1,9 @@
+import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
-import React, { useEffect, useState } from "react";
 import { Link, Navigate } from "react-router-dom";
 import Loader from "../components/Loader";
 import { baseAPIUrl } from "../api";
-import { response } from "express";
+
 import { FavoriteInterface } from "../types";
 import clsx from "clsx";
 import { useCurrenUserStore } from "../stores/currentUser";

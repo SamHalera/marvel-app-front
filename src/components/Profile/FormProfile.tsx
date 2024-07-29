@@ -1,13 +1,12 @@
 import React, { useState } from "react";
-import { CloudinaryFile, UserInterface } from "../../types";
+import { UserInterface } from "../../types";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { UserIcon } from "@heroicons/react/24/solid";
 import Input from "../Form/Input";
 import { baseAPIUrl } from "../../api";
 import Cookies from "js-cookie";
 import { useToastStore } from "../../stores/toast";
 import ImageUpload from "./ImageUpload";
-import { useNavigate } from "react-router-dom";
+
 import { useCurrenUserStore } from "../../stores/currentUser";
 
 export type FormProfileValues = {
@@ -33,10 +32,9 @@ const FormProfile = ({
   const [errorConfirmPass, setErrorConfirmPass] = useState<string>("");
   const [errorForm, setErrorForm] = useState<string>("");
   const { setSuccessMessage } = useToastStore();
-  const { currentAvatar, setCurrentAvatar } = useCurrenUserStore();
+  const { setCurrentAvatar } = useCurrenUserStore();
   const tokenCookies = Cookies.get("token");
 
-  const navigate = useNavigate();
   const {
     register,
     formState: { errors, isDirty },
@@ -55,14 +53,8 @@ const FormProfile = ({
 
   const onSubmit: SubmitHandler<FormProfileValues> = async (values) => {
     try {
-      const {
-        email,
-        username,
-        password,
-        newPassword,
-        confirmNewPassword,
-        picture,
-      } = values;
+      const { username, password, newPassword, confirmNewPassword, picture } =
+        values;
 
       if (newPassword && !password) {
         setErrorPass("It seems you forget to enter your current password");

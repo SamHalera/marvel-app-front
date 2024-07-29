@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import menuItems from "../../assets/data/menuItems.json";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import clsx from "clsx";
 
 import { useOpenModalStore } from "../../stores/openModal";
@@ -10,7 +10,7 @@ const MobileNav = ({ tokenCookies }: { tokenCookies: string | null }) => {
   const [showMobileNav, setSwhoMobileNav] = useState<boolean>(false);
   const { pathname } = useLocation();
   const navigate = useNavigate();
-  const { openModal, setOpenModal } = useOpenModalStore();
+  const { setOpenModal } = useOpenModalStore();
   return (
     <div>
       <Bars3Icon

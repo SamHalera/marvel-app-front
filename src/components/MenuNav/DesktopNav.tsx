@@ -1,11 +1,10 @@
-import React from "react";
 import menuItems from "../../assets/data/menuItems.json";
 import { Link, useLocation } from "react-router-dom";
 import clsx from "clsx";
 import { useOpenModalStore } from "../../stores/openModal";
 const DesktopNav = ({ tokenCookies }: { tokenCookies: string | null }) => {
   const { pathname } = useLocation();
-  const { openModal, setOpenModal } = useOpenModalStore();
+  const { setOpenModal } = useOpenModalStore();
   return (
     <nav className="mr-5 hidden items-center gap-10 md:flex">
       <div className="flex gap-4">

@@ -6,9 +6,9 @@ import SearchBar from "../components/SearchBar";
 import Loader from "../components/Loader";
 import Pagination from "../components/Pagination";
 import CharacterComponent from "../components/Character/CharacterComponent";
-import { useTokenCookiesStore } from "../stores/tokenCookies";
+
 import Cookies from "js-cookie";
-import { Navigate, redirect } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
 const Characters = () => {
   const [data, setData] = useState<CharactersType>();

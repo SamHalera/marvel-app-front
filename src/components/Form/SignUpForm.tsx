@@ -5,7 +5,6 @@ import { baseAPIUrl } from "../../api";
 import { useNavigate } from "react-router-dom";
 
 import { useToastStore } from "../../stores/toast";
-import ModalLogin from "./ModalLogin";
 import { useTokenCookiesStore } from "../../stores/tokenCookies";
 import { createTokenCookies } from "../../libs/utils";
 import { useOpenModalStore } from "../../stores/openModal";
@@ -21,7 +20,7 @@ const SignUpForm = () => {
   const [errorUsername, setErrorUsername] = useState<string>("");
   const [errorEmail, setErrorEmail] = useState<string>("");
   const [errorPass, setErrorPass] = useState<string>("");
-  const { openModal, setOpenModal } = useOpenModalStore();
+  const { setOpenModal } = useOpenModalStore();
 
   const { setSuccessMessage } = useToastStore();
   const { setTokenCookies } = useTokenCookiesStore();

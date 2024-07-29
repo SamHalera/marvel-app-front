@@ -1,4 +1,3 @@
-import React from "react";
 import { UserIcon } from "@heroicons/react/24/solid";
 import { FieldError, UseFormRegister } from "react-hook-form";
 import { CloudinaryFile } from "../../types";
@@ -7,9 +6,8 @@ const ImageUpload = ({
   register,
   userAvatar,
   error,
-  errorMessage,
+
   name,
-  disabled,
 }: {
   register: UseFormRegister<any>;
   userAvatar?: CloudinaryFile;

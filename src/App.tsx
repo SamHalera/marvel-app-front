@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -23,7 +23,7 @@ import Favorites from "./pages/Favorites";
 
 function App() {
   const { setTokenCookies } = useTokenCookiesStore();
-  const { openModal, setOpenModal } = useOpenModalStore();
+  const { openModal } = useOpenModalStore();
   const {
     currentAvatar,
     setCurrentAvatar,

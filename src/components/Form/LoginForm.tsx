@@ -1,6 +1,6 @@
-import React, { SetStateAction, useState } from "react";
+import React, { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { Navigate, redirect, useNavigate } from "react-router-dom";
+import { redirect, useNavigate } from "react-router-dom";
 import { baseAPIUrl } from "../../api";
 import Input from "./Input";
 import { useTokenCookiesStore } from "../../stores/tokenCookies";
@@ -14,9 +14,8 @@ export type LoginFormValues = {
 };
 const LoginForm = () => {
   const [errorEmail, setErrorEmail] = useState<string>("");
-  const [errorPass, setErrorPass] = useState<string>("");
   const { setTokenCookies } = useTokenCookiesStore();
-  const { openModal, setOpenModal } = useOpenModalStore();
+  const { setOpenModal } = useOpenModalStore();
   const { setErrorMessage } = useToastStore();
 
   const {

@@ -10,7 +10,6 @@ const ToastCaller = () => {
     infoMessage,
     setSuccessMessage,
     setErrorMessage,
-    setInfoMessage,
   } = useToastStore();
 
   useEffect(() => {

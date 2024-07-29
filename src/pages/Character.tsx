@@ -5,7 +5,7 @@ import { baseAPIUrl } from "../api";
 import Loader from "../components/Loader";
 import FavoritesComponent from "../components/FavoritesComponent";
 import ComicsCarousel from "../components/Character/ComicsCarousel";
-import { useTokenCookiesStore } from "../stores/tokenCookies";
+
 import Cookies from "js-cookie";
 
 const Character = () => {

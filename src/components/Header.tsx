@@ -1,15 +1,10 @@
 import { useState } from "react";
 import logo from "../assets/images/logo.svg";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { useTokenCookiesStore } from "../stores/tokenCookies";
 
-import clsx from "clsx";
-import menuItems from "../assets/data/menuItems.json";
-import { useOpenModalStore } from "../stores/openModal";
-
 import ProfileDropdown from "./Profile/ProfileDropdown";
-import { Bars3Icon } from "@heroicons/react/24/solid";
 import DesktopNav from "./MenuNav/DesktopNav";
 import MobileNav from "./MenuNav/MobileNav";
 
@@ -17,10 +12,8 @@ const Header = () => {
   const [showMenu, setSwhoMenu] = useState<boolean>(false);
 
   const { tokenCookies } = useTokenCookiesStore();
-  const { openModal, setOpenModal } = useOpenModalStore();
 
   const navigate = useNavigate();
-  const { pathname } = useLocation();
 
   return (
     <>
