@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -20,8 +20,10 @@ import Profile from "./pages/Profile";
 import { useCurrenUserStore } from "./stores/currentUser";
 import { baseAPIUrl } from "./api";
 import Favorites from "./pages/Favorites";
+import ScrollToTop from "./components/ScrollToTop";
 
 function App() {
+  const [scrollToTopHidden, setScrollToTopHidden] = useState<boolean>(true);
   const { setTokenCookies } = useTokenCookiesStore();
   const { openModal } = useOpenModalStore();
   const {
@@ -48,6 +50,20 @@ function App() {
       setCurrentAvatar(data.avatar);
     };
     !currentAvatar && fetchCurrentUser();
+    const handleScrollToTop = () => {
+      if (window.scrollY > 400) {
+        setScrollToTopHidden(false);
+      } else {
+        setScrollToTopHidden(true);
+      }
+    };
+
+    window.addEventListener("scroll", handleScrollToTop);
+
+    return () => {
+      window.removeEventListener("scroll", handleScrollToTop);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentAvatar]);
   return (
     <>
@@ -66,6 +82,9 @@ function App() {
           <Route path="/signup" element={<SignUp />}></Route>
           <Route path="/login" element={<Login />}></Route>
         </Routes>
+        {!scrollToTopHidden && (
+          <ScrollToTop setScrollToTopHidden={setScrollToTopHidden} />
+        )}
         <Footer />
       </Router>
     </>

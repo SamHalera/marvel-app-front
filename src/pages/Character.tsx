@@ -44,6 +44,7 @@ const Character = () => {
       }
     };
     fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [addedToFavorites]);
 
   return isLoading ? (

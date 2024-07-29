@@ -43,6 +43,7 @@ const Favorites = () => {
       behavior: "smooth",
     });
     fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [removedFromFavorites]);
   return !tokenCookies ? (
     <Navigate to={"/"} />

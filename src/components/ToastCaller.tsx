@@ -25,6 +25,7 @@ const ToastCaller = () => {
       toast.info(infoMessage);
       setErrorMessage(null);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [successMessage, errorMessage, infoMessage]);
   return <Toaster richColors />;
 };

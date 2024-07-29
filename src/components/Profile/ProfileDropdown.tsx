@@ -29,6 +29,7 @@ const ProfileDropdown = ({
     return () => {
       window.removeEventListener("click", handleCLick);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ref]);
   return (
     <div className="relative">
