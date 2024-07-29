@@ -22,7 +22,7 @@ const FavoritesComponent = ({
 }) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const { tokenCookies } = useTokenCookiesStore();
-  console.log(label);
+
   return (
     <div className="favorites z-10 h-10 flex">
       {isLoading ? (

@@ -18,8 +18,6 @@ const LoginForm = () => {
   const { setTokenCookies } = useTokenCookiesStore();
   const { openModal, setOpenModal } = useOpenModalStore();
   const { setErrorMessage } = useToastStore();
-  console.log(openModal);
-  // if (!openModal) return;
 
   const {
     register,

@@ -64,13 +64,9 @@ const FormProfile = ({
         picture,
       } = values;
 
-      console.log(picture);
-
       if (newPassword && !password) {
         setErrorPass("It seems you forget to enter your current password");
       } else if (newPassword !== confirmNewPassword) {
-        console.log("newPassword", newPassword);
-        console.log("confirmNewPassword", confirmNewPassword);
         setErrorConfirmPass("New password and confirmation must be the same!");
       } else {
         const formData = new FormData();

@@ -14,7 +14,7 @@ const Home = () => {
   const { openModal, setOpenModal } = useOpenModalStore();
 
   const tokenCookies = Cookies.get("token");
-  console.log(tokenCookies);
+
   const navigate = useNavigate();
 
   const arrayComics: ComicItemArray[] = [];
@@ -41,7 +41,7 @@ const Home = () => {
     };
     fetchData();
   }, []);
-  console.log(openModal);
+
   return (
     <>
       <main className="relative flex flex-col items-center justify-center">

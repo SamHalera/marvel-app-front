@@ -45,7 +45,7 @@ const Character = () => {
     };
     fetchData();
   }, [addedToFavorites]);
-  console.log(data);
+
   return isLoading ? (
     <Loader />
   ) : (

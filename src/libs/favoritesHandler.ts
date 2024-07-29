@@ -6,8 +6,6 @@ export const handleAddFavorite = async (
   target: string
 ) => {
   try {
-    console.log("Hello favorite", target);
-
     const bodyForQuery = {
       itemId: id,
       label: target,
@@ -31,7 +29,6 @@ export const handleAddFavorite = async (
 };
 
 export const handleRemoveFavorite = async (id: string, target: string) => {
-  console.log("remove");
   try {
     const response = await fetch(`${baseAPIUrl}/favorites/${id}`, {
       method: "DELETE",
