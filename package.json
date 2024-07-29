@@ -33,7 +33,6 @@
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
-    "parser": "@typescript-eslint/parser",
     "plugins": [
       "@typescript-eslint"
     ],
@@ -67,7 +66,6 @@
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@typescript-eslint/eslint-plugin": "^7.17.0",
-    "@typescript-eslint/parser": "^7.17.0",
     "daisyui": "^4.12.10"
   }
 }
