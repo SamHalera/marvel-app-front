@@ -80,11 +80,7 @@ const ProfileDropdown = ({
           <span className="text-xl">
             {currentAvatar ? (
               <>
-                <img
-                  className=""
-                  src={currentAvatar.secure_url}
-                  alt="Profile picture"
-                />
+                <img className="" src={currentAvatar.secure_url} alt="User" />
               </>
             ) : (
               <UserIcon className="size-8" />

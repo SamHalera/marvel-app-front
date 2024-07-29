@@ -23,7 +23,7 @@ const ImageUpload = ({
         <img
           className="rounded-full w-40"
           src={userAvatar.secure_url}
-          alt="profile picture"
+          alt="User"
         />
       ) : (
         <UserIcon className="size-24 rounded-full border" />
