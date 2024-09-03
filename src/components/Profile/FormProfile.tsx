@@ -42,7 +42,7 @@ const FormProfile = ({
     reset,
   } = useForm<FormProfileValues>({
     values: {
-      picture: userData.avatar.secure_url ?? "",
+      picture: userData.avatar?.secure_url ?? "",
       username: userData.username ?? "",
       email: userData.email ?? "",
       password: "",
