@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { redirect, useNavigate } from "react-router-dom";
-import { baseAPIUrl } from "../../api";
 import Input from "./Input";
 import { useTokenCookiesStore } from "../../stores/tokenCookies";
 import { createTokenCookies } from "../../libs/utils";
@@ -29,14 +28,17 @@ const LoginForm = () => {
 
   const onSubmit: SubmitHandler<LoginFormValues> = async (values) => {
     try {
-      const response = await fetch(`${baseAPIUrl}/user/login`, {
-        method: "POST",
-        cache: "no-cache",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(values),
-      });
+      const response = await fetch(
+        `${process.env.REACT_APP_API_URL}/user/login`,
+        {
+          method: "POST",
+          cache: "no-cache",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(values),
+        }
+      );
       const data = await response.json();
 
       if (data?.message === "Unauthorized!")

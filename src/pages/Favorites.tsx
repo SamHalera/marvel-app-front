@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import { Link, Navigate } from "react-router-dom";
 import Loader from "../components/Loader";
-import { baseAPIUrl } from "../api";
 
 import { FavoriteInterface } from "../types";
 import clsx from "clsx";
@@ -22,11 +21,14 @@ const Favorites = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`${baseAPIUrl}/favorites`, {
-          headers: {
-            Authorization: `Bearer ${tokenCookies}`,
-          },
-        });
+        const response = await fetch(
+          `${process.env.REACT_APP_API_URL}/favorites`,
+          {
+            headers: {
+              Authorization: `Bearer ${tokenCookies}`,
+            },
+          }
+        );
 
         const data = await response.json();
 

@@ -3,7 +3,6 @@ import FormProfile from "../components/Profile/FormProfile";
 import { UserInterface } from "../types";
 import Cookies from "js-cookie";
 import { Navigate, useNavigate } from "react-router-dom";
-import { baseAPIUrl } from "../api";
 
 const Profile = () => {
   const [userData, setUserData] = useState<UserInterface>();
@@ -15,11 +14,14 @@ const Profile = () => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const response = await fetch(`${baseAPIUrl}/user/profile`, {
-          headers: {
-            Authorization: `Bearer ${tokenCookies}`,
-          },
-        });
+        const response = await fetch(
+          `${process.env.REACT_APP_API_URL}/user/profile`,
+          {
+            headers: {
+              Authorization: `Bearer ${tokenCookies}`,
+            },
+          }
+        );
 
         const data = await response.json();
 

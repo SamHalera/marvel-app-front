@@ -1,5 +1,3 @@
-import { baseAPIUrl } from "../api";
-
 export const handleAddFavorite = async (
   id: string,
   token: string,
@@ -11,7 +9,7 @@ export const handleAddFavorite = async (
       label: target,
     };
     await fetch(
-      `${baseAPIUrl}/favorites`,
+      `${process.env.REACT_APP_API_URL}/favorites`,
 
       {
         method: "POST",
@@ -30,7 +28,7 @@ export const handleAddFavorite = async (
 
 export const handleRemoveFavorite = async (id: string, target: string) => {
   try {
-    await fetch(`${baseAPIUrl}/favorites/${id}`, {
+    await fetch(`${process.env.REACT_APP_API_URL}/favorites/${id}`, {
       method: "DELETE",
       cache: "no-cache",
     });
