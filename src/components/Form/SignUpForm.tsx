@@ -36,35 +36,39 @@ const SignUpForm = () => {
 
   const onSubmit: SubmitHandler<SignUpFormValues> = async (values) => {
     try {
-      const response = await fetch(
-        `${process.env.REACT_APP_API_URL}/user/signup`,
-        {
-          method: "POST",
-          cache: "no-cache",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(values),
-        }
-      );
-      const data = await response.json();
-
-      if (data.token) {
-        const cookies = createTokenCookies(data.token);
-
-        cookies && setTokenCookies(cookies);
-
-        setSuccessMessage(
-          "User has been created! Welcome to the marvelous world!"
-        );
-        navigate("/");
-        reset();
+      if (values.password && values.password.length < 6) {
+        setErrorPass("Your password is too short!");
       } else {
-        if (data?.message === "This email already exists!") {
-          setIsError(true);
-          setErrorEmail(
-            "This email already has an account, please use another one :)"
+        const response = await fetch(
+          `${process.env.REACT_APP_API_URL}/user/signup`,
+          {
+            method: "POST",
+            cache: "no-cache",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(values),
+          }
+        );
+        const data = await response.json();
+
+        if (data.token) {
+          const cookies = createTokenCookies(data.token);
+
+          cookies && setTokenCookies(cookies);
+
+          setSuccessMessage(
+            "User has been created! Welcome to the marvelous world!"
           );
+          navigate("/");
+          reset();
+        } else {
+          if (data?.message === "This email already exists!") {
+            setIsError(true);
+            setErrorEmail(
+              "This email already has an account, please use another one :)"
+            );
+          }
         }
       }
     } catch (error) {
