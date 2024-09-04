@@ -18,7 +18,7 @@ import { useOpenModalStore } from "./stores/openModal";
 import ModalLogin from "./components/Form/ModalLogin";
 import Profile from "./pages/Profile";
 import { useCurrenUserStore } from "./stores/currentUser";
-import { baseAPIUrl } from "./api";
+// import { REACT_APP_API_URL } from "./api";
 import Favorites from "./pages/Favorites";
 import ScrollToTop from "./components/ScrollToTop";
 
@@ -38,11 +38,14 @@ function App() {
 
     cookies && setTokenCookies(cookies);
     const fetchCurrentUser = async () => {
-      const response = await fetch(`${baseAPIUrl}/user/profile`, {
-        headers: {
-          Authorization: `Bearer ${cookies}`,
-        },
-      });
+      const response = await fetch(
+        `${process.env.REACT_APP_API_URL}/user/profile`,
+        {
+          headers: {
+            Authorization: `Bearer ${cookies}`,
+          },
+        }
+      );
 
       const data = await response.json();
       setCurrentEmail(data.email);

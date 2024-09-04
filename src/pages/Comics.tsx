@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import Loader from "../components/Loader";
-import { baseAPIUrl } from "../api";
 import { ComicsType } from "../types";
 
 import ComicComponent from "../components/Comic/ComicComponent";
@@ -47,7 +46,7 @@ const Comics = () => {
         token: tokenCookies,
         skip,
       };
-      const response = await fetch(`${baseAPIUrl}/comics`, {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/comics`, {
         method: "POST",
         body: JSON.stringify(bodyForQuery),
         headers: {
@@ -114,7 +113,7 @@ const Comics = () => {
           setPage={setPage}
           nbPages={nbPages}
           setSkip={setSkip}
-          apiUrl={`${baseAPIUrl}/comics`}
+          apiUrl={`${process.env.REACT_APP_API_URL}/comics`}
         />
       )}
     </main>

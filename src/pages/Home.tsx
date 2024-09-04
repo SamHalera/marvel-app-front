@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { CharactersType, ComicItemArray, ComicsType } from "../types";
-import { baseAPIUrl } from "../api";
 import clsx from "clsx";
 import ItemCarouselHome from "../components/ItemCarouselHome";
 
