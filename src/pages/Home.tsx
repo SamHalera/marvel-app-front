@@ -16,7 +16,7 @@ const Home = () => {
   const tokenCookies = Cookies.get("token");
 
   const navigate = useNavigate();
-
+  console.log(process.env.REACT_APP_API_URL);
   const arrayComics: ComicItemArray[] = [];
   if (comics && comics?.results?.length > 0) {
     for (let i = 0; i < 3; i++) {
@@ -30,7 +30,9 @@ const Home = () => {
     const fetchData = async () => {
       try {
         const limit = 20;
-        const response = await fetch(`${baseAPIUrl}?limit=${limit}`);
+        const response = await fetch(
+          `${process.env.REACT_APP_API_URL}?limit=${limit}`
+        );
         const data = await response.json();
 
         setChararcters(data[0]);
