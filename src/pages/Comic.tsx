@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { ComicItemArray } from "../types";
 import { Link, useParams } from "react-router-dom";
 import Loader from "../components/Loader";
-import { baseAPIUrl } from "../api";
 import { ArrowLeftIcon } from "@heroicons/react/24/solid";
 import FavoritesComponent from "../components/FavoritesComponent";
 import Cookies from "js-cookie";
@@ -20,8 +19,8 @@ const Comic = () => {
 
       try {
         const response = await fetch(
-          // `${baseAPIUrl}/comic/${id}?userId=${user._id}`,
-          `${baseAPIUrl}/comic/${id}`,
+          // `${process.env.REACT_APP_API_URL}/comic/${id}?userId=${user._id}`,
+          `${process.env.REACT_APP_API_URL}/comic/${id}`,
           {
             method: "GET",
             // body: JSON.stringify(body),

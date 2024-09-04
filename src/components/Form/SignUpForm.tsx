@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import Input from "./Input";
-import { baseAPIUrl } from "../../api";
+
 import { useNavigate } from "react-router-dom";
 
 import { useToastStore } from "../../stores/toast";
@@ -36,14 +36,17 @@ const SignUpForm = () => {
 
   const onSubmit: SubmitHandler<SignUpFormValues> = async (values) => {
     try {
-      const response = await fetch(`${baseAPIUrl}/user/signup`, {
-        method: "POST",
-        cache: "no-cache",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(values),
-      });
+      const response = await fetch(
+        `${process.env.REACT_APP_API_URL}/user/signup`,
+        {
+          method: "POST",
+          cache: "no-cache",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(values),
+        }
+      );
       const data = await response.json();
 
       if (data.token) {

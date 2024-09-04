@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { UserInterface } from "../../types";
 import { SubmitHandler, useForm } from "react-hook-form";
 import Input from "../Form/Input";
-import { baseAPIUrl } from "../../api";
 import Cookies from "js-cookie";
 import { useToastStore } from "../../stores/toast";
 import ImageUpload from "./ImageUpload";
@@ -68,14 +67,17 @@ const FormProfile = ({
 
         picture && formData.append("picture", picture[0]);
 
-        const response = await fetch(`${baseAPIUrl}/user/profile`, {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer ${tokenCookies}`,
-            // "Content-Type": "multipart/form-data",
-          },
-          body: formData,
-        });
+        const response = await fetch(
+          `${process.env.REACT_APP_API_URL}/user/profile`,
+          {
+            method: "POST",
+            headers: {
+              Authorization: `Bearer ${tokenCookies}`,
+              // "Content-Type": "multipart/form-data",
+            },
+            body: formData,
+          }
+        );
         const data = await response.json();
 
         if (data?.type === "error") {

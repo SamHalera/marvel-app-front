@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { CharactersType } from "../types";
 import { useDebouncedCallback } from "use-debounce";
-import { baseAPIUrl } from "../api";
+
 import SearchBar from "../components/SearchBar";
 import Loader from "../components/Loader";
 import Pagination from "../components/Pagination";
@@ -48,14 +48,17 @@ const Characters = () => {
         token: tokenCookies,
         skip,
       };
-      const response = await fetch(`${baseAPIUrl}/characters`, {
-        method: "POST",
-        body: JSON.stringify(bodyForQuery),
-        headers: {
-          Authorization: `Bearer ${tokenCookies}`,
-          "Content-Type": "application/json",
-        },
-      });
+      const response = await fetch(
+        `${process.env.REACT_APP_API_URL}/characters`,
+        {
+          method: "POST",
+          body: JSON.stringify(bodyForQuery),
+          headers: {
+            Authorization: `Bearer ${tokenCookies}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
       const { data } = await response.json();
 
@@ -110,7 +113,7 @@ const Characters = () => {
                 setPage={setPage}
                 nbPages={nbPages}
                 setSkip={setSkip}
-                apiUrl={`${baseAPIUrl}/characters`}
+                apiUrl={`${process.env.REACT_APP_API_URL}/characters`}
                 // token={user.token}
               />
             )}

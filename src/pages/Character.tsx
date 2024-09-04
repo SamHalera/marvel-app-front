@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { CharacterDataType } from "../types";
-import { baseAPIUrl } from "../api";
+
 import Loader from "../components/Loader";
 import FavoritesComponent from "../components/FavoritesComponent";
 import ComicsCarousel from "../components/Character/ComicsCarousel";
@@ -22,8 +22,8 @@ const Character = () => {
           id,
         };
         const response = await fetch(
-          // `${baseAPIUrl}/comic/${id}?userId=${user._id}`,
-          `${baseAPIUrl}/comics/${id}`,
+          // `${process.env.REACT_APP_API_URL}/comic/${id}?userId=${user._id}`,
+          `${process.env.REACT_APP_API_URL}/comics/${id}`,
           {
             method: "POST",
             body: JSON.stringify(body),
