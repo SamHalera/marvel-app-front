@@ -18,7 +18,6 @@ import { useOpenModalStore } from "./stores/openModal";
 import ModalLogin from "./components/Form/ModalLogin";
 import Profile from "./pages/Profile";
 import { useCurrenUserStore } from "./stores/currentUser";
-// import { REACT_APP_API_URL } from "./api";
 import Favorites from "./pages/Favorites";
 import ScrollToTop from "./components/ScrollToTop";
 
