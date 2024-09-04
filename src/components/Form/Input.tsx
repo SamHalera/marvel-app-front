@@ -29,7 +29,7 @@ const Input = ({
   return (
     <label className="form-control w-full">
       <div className="label">
-        <span className="label-text text-white text-xl">{label}</span>
+        <span className="label-text text-white text-xl mr-2">{label}</span>
         {errorMessage && (
           <span className="label-text-alt text-red-600">{errorMessage}</span>
         )}
