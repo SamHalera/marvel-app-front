@@ -51,7 +51,9 @@ const LoginForm = () => {
         redirect("/");
         reset();
       }
-    } catch (error) {}
+    } catch (error) {
+      console.error(error);
+    }
   };
   return (
     <div className=" flex flex-col gap-6 py-4">
@@ -84,7 +86,7 @@ const LoginForm = () => {
         <button className="btn btn-marvel self-start" type="submit">
           LOGIN
         </button>
-        <div className="boutons">
+        <div className="flex flex-col gap-5">
           <div
             onClick={() => {
               setOpenModal(false);
@@ -94,6 +96,16 @@ const LoginForm = () => {
             className="hover:text-primary transition-colors text-white cursor-pointer"
           >
             Not a member yet? Sign up for free
+          </div>
+          <div
+            onClick={() => {
+              setOpenModal(false);
+              navigate("/forgotten-password");
+              // Navigate({ to: "/signup" });
+            }}
+            className="hover:text-primary transition-colors text-white cursor-pointer"
+          >
+            Did you forget your password?
           </div>
         </div>
       </form>
