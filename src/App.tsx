@@ -20,6 +20,8 @@ import Profile from "./pages/Profile";
 import { useCurrenUserStore } from "./stores/currentUser";
 import Favorites from "./pages/Favorites";
 import ScrollToTop from "./components/ScrollToTop";
+import ForgottenPass from "./pages/ForgottenPass";
+import ResetPassword from "./pages/ResetPassword";
 
 function App() {
   const [scrollToTopHidden, setScrollToTopHidden] = useState<boolean>(true);
@@ -82,6 +84,8 @@ function App() {
           <Route path="/characters" element={<Characters />}></Route>
           <Route path="/character/:id" element={<Character />}></Route>
           <Route path="/signup" element={<SignUp />}></Route>
+          <Route path="/forgotten-password" element={<ForgottenPass />}></Route>
+          <Route path="/reset-password" element={<ResetPassword />}></Route>
           <Route path="/login" element={<Login />}></Route>
         </Routes>
         {!scrollToTopHidden && (
