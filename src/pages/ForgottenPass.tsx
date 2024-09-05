@@ -46,7 +46,7 @@ const ForgottenPass = () => {
         {isSubmitSuccessful ? (
           <div>
             <h2 className=" text-success text-xl md:text-2xl text-center mb-9">
-              An eamil has been sent successfully to your address
+              An email has been sent successfully to your address
             </h2>
             <p className="text-success text-center mb-9">
               Please check your mailbox and follow the instructions
