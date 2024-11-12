@@ -4,7 +4,7 @@ import {
   handleRemoveFavorite,
 } from "../libs/favoritesHandler";
 import { useTokenCookiesStore } from "../stores/tokenCookies";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import LoaderSingleAction from "./LoaderSingleAction";
 
 const FavoritesComponent = ({
@@ -23,8 +23,9 @@ const FavoritesComponent = ({
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const { tokenCookies } = useTokenCookiesStore();
 
+  useEffect(() => {}, [addedToFavorites]);
   return (
-    <div className="favorites z-10 h-10 flex">
+    <div className="favorites z-10 h-10 flex group">
       {isLoading ? (
         <LoaderSingleAction />
       ) : isFavorite ? (
@@ -37,7 +38,7 @@ const FavoritesComponent = ({
               setAddedToFavorites(!addedToFavorites);
               setIsLoading(false);
             }}
-            className="size-6 cursor-pointer text-2xl text-[#ed1d24]"
+            className="size-6 cursor-pointer text-2xl text-[#ed1d24] group-hover:size-7 duration-500"
           />
         </div>
       ) : (
@@ -50,9 +51,8 @@ const FavoritesComponent = ({
               setAddedToFavorites(!addedToFavorites);
               setIsLoading(false);
             }}
-            className="size-6 cursor-pointer text-2xl"
+            className="size-6 cursor-pointer text-2xl hover:size-7 group-hover:text-[#ed1d24]  duration-500"
           />
-          <span className="ml-2 text-xs text-white">add to favorites</span>
         </div>
       )}
     </div>

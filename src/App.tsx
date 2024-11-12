@@ -22,16 +22,19 @@ import Favorites from "./pages/Favorites";
 import ScrollToTop from "./components/ScrollToTop";
 import ForgottenPass from "./pages/ForgottenPass";
 import ResetPassword from "./pages/ResetPassword";
+import Test from "./pages/Test";
+import ModalVisitorOptionInformation from "./components/Form/ModalVisitorInformation";
 
 function App() {
   const [scrollToTopHidden, setScrollToTopHidden] = useState<boolean>(true);
   const { setTokenCookies } = useTokenCookiesStore();
-  const { openModal } = useOpenModalStore();
+  const { openModal, openModalVisitorInformation } = useOpenModalStore();
   const {
     currentAvatar,
     setCurrentAvatar,
     setCurrentEmail,
     setCurrentUsername,
+    currentUsername,
   } = useCurrenUserStore();
 
   useEffect(() => {
@@ -73,11 +76,13 @@ function App() {
     <>
       <Router>
         {openModal && <ModalLogin />}
+        {openModalVisitorInformation && <ModalVisitorOptionInformation />}
         <ToastCaller />
         <Header />
         <Routes>
           <Route path="/" element={<Home />}></Route>
           <Route path="/comics" element={<Comics />}></Route>
+          <Route path="/test/characters" element={<Test />}></Route>
           <Route path="/profile" element={<Profile />}></Route>
           <Route path="/favorites" element={<Favorites />}></Route>
           <Route path="/comic/:id" element={<Comic />}></Route>
