@@ -1,30 +1,22 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { CharactersType, ComicItemArray, ComicsType } from "../types";
-import clsx from "clsx";
+import { CharactersType, ComicItemArray } from "../types";
+
 import ItemCarouselHome from "../components/ItemCarouselHome";
 
 import { useOpenModalStore } from "../stores/openModal";
 import Cookies from "js-cookie";
+import ComicItemHomePage from "../components/ComicItemHomePage";
 
 const Home = () => {
   const [characters, setChararcters] = useState<CharactersType | null>();
-  const [comics, setComics] = useState<ComicsType | null>();
+  const [comics, setComics] = useState<ComicItemArray[] | null>();
   const { setOpenModal } = useOpenModalStore();
 
   const tokenCookies = Cookies.get("token");
 
   const navigate = useNavigate();
-  console.log(process.env.REACT_APP_API_URL);
-  const arrayComics: ComicItemArray[] = [];
-  if (comics && comics?.results?.length > 0) {
-    for (let i = 0; i < 3; i++) {
-      const index = Math.floor(Math.random() * comics?.results.length);
-      if (!comics.results[i].thumbnail.path.includes("image_not_available")) {
-        arrayComics.push(comics.results[index]);
-      }
-    }
-  }
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -32,10 +24,26 @@ const Home = () => {
         const response = await fetch(
           `${process.env.REACT_APP_API_URL}?limit=${limit}`
         );
+
         const data = await response.json();
 
-        setChararcters(data[0]);
-        setComics(data[1]);
+        const charactersData = data[0];
+        const comicsData = data[1];
+        setChararcters(charactersData);
+
+        const arrayComicsData = comicsData.results.filter(
+          (item: ComicItemArray, index: number) => {
+            if (
+              !item.thumbnail.path.includes("image_not_available") &&
+              index < 3
+            ) {
+              return item;
+            }
+            return null;
+          }
+        );
+
+        setComics(arrayComicsData);
       } catch (error) {
         console.error(error);
       }
@@ -89,25 +97,15 @@ const Home = () => {
           </div>
           <div className="left-[300px] top-[200px] mx-auto lg:absolute">
             <div className="relative flex flex-col items-center justify-center md:flex-row gap-4">
-              {arrayComics.length > 0 &&
-                arrayComics.map((item: ComicItemArray, index: number) => {
+              {comics &&
+                comics?.length > 0 &&
+                comics?.map((item: ComicItemArray, index: number) => {
                   return (
-                    <div
+                    <ComicItemHomePage
                       key={item._id}
-                      className={clsx("lg:absolute lg:h-[450px] lg:w-[350px]", {
-                        "lg:left-[0px] lg:top-[0px]": index === 0,
-                        "lg:left-[200px] lg:top-[75px]": index === 1,
-                        "lg:left-[400px] lg:top-[150px]": index === 2,
-                      })}
-                    >
-                      <div className="">
-                        <img
-                          className="h-68 w-52 object-contain object-center lg:h-[450px] lg:w-[350px]"
-                          src={`${item.thumbnail.path}.${arrayComics[0].thumbnail.extension}`}
-                          alt=""
-                        />
-                      </div>
-                    </div>
+                      item={item}
+                      index={index}
+                    />
                   );
                 })}
             </div>
@@ -126,7 +124,6 @@ const Home = () => {
                     if (tokenCookies) {
                       navigate("/characters");
                     } else {
-                      // navigate("/");
                       setOpenModal(true);
                     }
                   }}

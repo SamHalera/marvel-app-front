@@ -75,7 +75,7 @@ const Favorites = () => {
               <div className="btn-groups mt-10">
                 <Link
                   className=" boder m-8 cursor-pointer border border-solid border-[#ed1d24] bg-[#ed1d24] p-3 text-white"
-                  to="/"
+                  to="/characters"
                 >
                   Characters
                 </Link>

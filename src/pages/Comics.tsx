@@ -20,11 +20,11 @@ const Comics = () => {
   const [addedToFavorites, setAddedToFavorites] = useState(false);
 
   const tokenCookies = Cookies.get("token");
-  // if (!tokenCookies) return Navigate({ to: "/" });
 
   const handleSearch = useDebouncedCallback((value: string) => {
     setFilterValue(value);
   }, 500);
+
   const dataFiltered = data
     ? data?.results.filter((item) => {
         if (filterValue) {
@@ -38,9 +38,6 @@ const Comics = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      // const emailQuery = user ? `&email=${user.email}` : "";
-      // title variable will be useless
-
       const bodyForQuery = {
         title,
         token: tokenCookies,
@@ -83,7 +80,6 @@ const Comics = () => {
           <div className="list-container">
             <section className="list comics-list mt-10 flex flex-col flex-wrap items-center justify-center gap-5">
               <div>
-                {/* <Results data={data} /> */}
                 <h2 className="m-2 text-3xl font-bold text-white">
                   Results: {filterValue ? dataFiltered?.length : data?.count}
                 </h2>
