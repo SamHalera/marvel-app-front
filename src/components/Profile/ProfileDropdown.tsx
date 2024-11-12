@@ -5,6 +5,7 @@ import { useTokenCookiesStore } from "../../stores/tokenCookies";
 import { Link, useNavigate } from "react-router-dom";
 import { UserIcon } from "@heroicons/react/24/solid";
 import { useCurrenUserStore } from "../../stores/currentUser";
+import { handleVisitorLogout } from "../../libs/demoSession";
 
 const ProfileDropdown = ({
   showMenu,
@@ -14,8 +15,8 @@ const ProfileDropdown = ({
   showMenu: boolean;
   setSwhoMenu: React.Dispatch<SetStateAction<boolean>>;
 }) => {
-  const { setTokenCookies } = useTokenCookiesStore();
-  const { currentAvatar } = useCurrenUserStore();
+  const { setTokenCookies, tokenCookies } = useTokenCookiesStore();
+  const { currentAvatar, currentUsername } = useCurrenUserStore();
   const navigate = useNavigate();
   const ref = useRef<HTMLDivElement>(null);
 
@@ -56,7 +57,11 @@ const ProfileDropdown = ({
             Favorites
           </Link>
           <div
-            onClick={() => {
+            onClick={async () => {
+              if (tokenCookies) {
+                await handleVisitorLogout(tokenCookies);
+              }
+
               Cookies.remove("token");
               setTokenCookies(null);
 

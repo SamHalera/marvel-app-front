@@ -75,10 +75,10 @@ const Character = () => {
                     setAddedToFavorites={setAddedToFavorites}
                   />
                 )}
-                <p className="">{data?.description}</p>
-                <p className="font-bold">
-                  You can find {data?.name} in these beside{" "}
-                  {data?.comics.length} comics
+                <p className="">
+                  {data?.description
+                    ? data.description
+                    : "Description not available"}
                 </p>
               </div>
             </div>
