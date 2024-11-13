@@ -11,12 +11,13 @@ const VideoHomeSection = () => {
   const [playVideo, setPlayVideo] = useState<boolean>(false);
 
   const videoRef = useRef<HTMLVideoElement>(null);
+
+  const videoRefCurrent = videoRef.current;
   const options = {
     root: null,
     rootMargin: "0px",
     thershold: 1,
   };
-
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
       const [entry] = entries;
@@ -27,14 +28,15 @@ const VideoHomeSection = () => {
       }
       setPlayVideo(entry.isIntersecting);
     }, options);
-    if (videoRef.current) observer.observe(videoRef.current);
+    if (videoRefCurrent) observer.observe(videoRefCurrent);
     return () => {
-      if (videoRef.current) observer.unobserve(videoRef.current);
+      if (videoRefCurrent) observer.unobserve(videoRefCurrent);
     };
-  }, [videoRef, options]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [videoRef]);
   return (
     <div className="w-full relative">
-      <div className=" w-full h-full  absolute bg-sky-950/80 flex flex-col items-center justify-center gap-5">
+      <div className=" w-full h-full  absolute bg-violet-950/50 flex flex-col items-center justify-center gap-5">
         <h3 className="text-6xl font-semibold text-white text-center">
           Step into the <span className="text-primary">Marvel Universe</span>
         </h3>
