@@ -17,10 +17,10 @@ header {
 }
 /*=======HOME=======*/
 .hero {
-  background-image: url("../src//assets/images/bg-img-home.jpg");
+  background-image: url("../src//assets/images/bg-marvel-heroes.jpg");
 }
 .section-heroe {
-  background-image: url("../src//assets/images/poster.png");
+  background-image: url("../src//assets/images/bg-img-home.jpg");
 }
 #first-section {
   background-image: linear-gradient(
