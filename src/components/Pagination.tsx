@@ -10,8 +10,8 @@ const Pagination = ({
   setSkip,
   nbPages,
   apiUrl,
-}: // token,
-{
+  token,
+}: {
   setDataCharacters?: React.Dispatch<
     React.SetStateAction<CharactersType | undefined>
   >;
@@ -22,6 +22,7 @@ const Pagination = ({
   setSkip: React.Dispatch<React.SetStateAction<number>>;
   nbPages: number;
   apiUrl: string;
+  token: string;
 }) => {
   const handlePagination = async (value: number, event: any) => {
     event.preventDefault();
@@ -32,13 +33,18 @@ const Pagination = ({
       value = nbPages;
     }
     try {
-      //verifier en local si cette requete declenche une erreur.==> possible car il n'y plus de headers qui est attendu en back
-      // const response = await axios.get(`${apiUrl}?skip=${value}`, {
-      //   headers: {
-      //     Authorization: `Bearer ${token}`,
-      //   },
-      // });
-      const response = await fetch(`${apiUrl}?skip=${value}`);
+      const bodyForQuery = {
+        skip: value,
+      };
+
+      const response = await fetch(`${apiUrl}`, {
+        method: "POST",
+        body: JSON.stringify(bodyForQuery),
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
       const data = await response.json();
 
       setDataCharacters && setDataCharacters(data);
@@ -75,13 +81,14 @@ const Pagination = ({
           <input
             className=" mr-3 w-16 border border-solid border-[#ed1d24] bg-transparent p-2 text-white"
             onChange={(event: ChangeEvent<HTMLInputElement>) => {
-              let value = event.target.value;
-              if (value <= "0") {
-                value = "1";
-              } else if (event.target.value > nbPages.toString()) {
-                value = nbPages.toString();
+              let value = parseFloat(event.target.value);
+              console.log("value", value);
+              if (value <= 0) {
+                value = 1;
+              } else if (value > nbPages) {
+                value = nbPages;
               }
-              setPage(parseFloat(event.target.value));
+              setPage(value);
             }}
             type="number"
             name="page"
