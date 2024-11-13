@@ -9,7 +9,7 @@ import ComicsCarousel from "../components/Character/ComicsCarousel";
 import Cookies from "js-cookie";
 
 const Character = () => {
-  const [data, setData] = useState<CharacterDataType>();
+  const [dataCharacter, setDataCharacter] = useState<CharacterDataType>();
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [addedToFavorites, setAddedToFavorites] = useState(false);
 
@@ -22,8 +22,8 @@ const Character = () => {
           id,
         };
         const response = await fetch(
-          // `${process.env.REACT_APP_API_URL}/comic/${id}?userId=${user._id}`,
           `${process.env.REACT_APP_API_URL}/comics/${id}`,
+
           {
             method: "POST",
             body: JSON.stringify(body),
@@ -36,7 +36,7 @@ const Character = () => {
 
         const data = await response.json();
 
-        data && setData(data);
+        data && setDataCharacter(data);
 
         setIsLoading(false);
       } catch (error) {
@@ -50,39 +50,41 @@ const Character = () => {
   return isLoading ? (
     <Loader />
   ) : (
-    <main className="one-character-main my-48">
+    <main className="one-character-main my-40">
       <div className="container mx-auto">
         <section className="character-wrapper">
           <div className="mb-9 flex flex-col items-center justify-center gap-5">
-            <h2 className=" text-center text-3xl font-bold text-white">
-              {data?.name}
-            </h2>
+            <h1 className=" text-center text-6xl font-bold text-white">
+              {dataCharacter?.name}
+            </h1>
           </div>
           <article className="character flex flex-col items-center">
             <div className="info-character mb-14 flex flex-col items-center justify-center gap-8  lg:flex-row lg:items-start">
               <img
-                className=" w-72 lg:w-80"
-                src={`${data?.thumbnail.path}.${data?.thumbnail.extension}`}
+                className=" w-72 lg:w-96"
+                src={`${dataCharacter?.thumbnail.path}.${dataCharacter?.thumbnail.extension}`}
                 alt=""
               />
               <div className="w-full px-10 text-xl leading-8 text-white lg:w-2/5">
-                {data && (
+                {dataCharacter && (
                   <FavoritesComponent
-                    itemId={data._id}
-                    isFavorite={data?.isFavorite ?? false}
+                    itemId={dataCharacter._id}
+                    isFavorite={dataCharacter?.isFavorite ?? false}
                     label="character"
                     addedToFavorites={addedToFavorites}
                     setAddedToFavorites={setAddedToFavorites}
                   />
                 )}
-                <p className="">
-                  {data?.description
-                    ? data.description
+                <p className="italic">
+                  {dataCharacter?.description
+                    ? dataCharacter.description
                     : "Description not available"}
                 </p>
               </div>
             </div>
-            {data && <ComicsCarousel data={data} />}
+            {dataCharacter?.comics && (
+              <ComicsCarousel data={dataCharacter.comics} label="comics" />
+            )}
           </article>
         </section>
       </div>

@@ -25,7 +25,7 @@ const FavoritesComponent = ({
 
   useEffect(() => {}, [addedToFavorites]);
   return (
-    <div className="favorites z-10 h-10 flex group">
+    <div className="favorites z-10  flex">
       {isLoading ? (
         <LoaderSingleAction />
       ) : isFavorite ? (
@@ -38,7 +38,7 @@ const FavoritesComponent = ({
               setAddedToFavorites(!addedToFavorites);
               setIsLoading(false);
             }}
-            className="size-6 cursor-pointer text-2xl text-[#ed1d24] group-hover:size-7 duration-500"
+            className="size-6 cursor-pointer text-2xl text-[#ed1d24] hover:size-7 duration-500"
           />
         </div>
       ) : (
@@ -51,7 +51,7 @@ const FavoritesComponent = ({
               setAddedToFavorites(!addedToFavorites);
               setIsLoading(false);
             }}
-            className="size-6 cursor-pointer text-2xl hover:size-7 group-hover:text-[#ed1d24]  duration-500"
+            className="size-6 cursor-pointer text-2xl hover:size-7 hover:text-[#ed1d24]  duration-500"
           />
         </div>
       )}
