@@ -1,6 +1,3 @@
-/* #root {
-  margin-top: 150px;
-} */
 html {
   scroll-behavior: smooth;
   transition: all 1s ease-in-out;
@@ -20,10 +17,10 @@ header {
 }
 /*=======HOME=======*/
 .hero {
-  background-image: url("../src//assets/images/bg-img-home.jpg");
+  background-image: url("../src//assets/images/bg-marvel-heroes.jpg");
 }
 .section-heroe {
-  background-image: url("../src//assets/images/poster.png");
+  background-image: url("../src//assets/images/bg-img-home.jpg");
 }
 #first-section {
   background-image: linear-gradient(
@@ -40,6 +37,13 @@ header {
 .bg-comics {
   /* height: 40vh; */
   background-color: #161a3a;
+  width: 100%;
+  background-image: url("../src/assets/images/bg-comics.jpg");
+}
+.bg-characters {
+  /* height: 40vh; */
+  background-color: #161a3a;
+  background-position: 20% 40%;
   width: 100%;
   background-image: url("../src/assets/images/bg-comics.jpg");
 }

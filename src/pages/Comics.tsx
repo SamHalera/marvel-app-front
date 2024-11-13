@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Loader from "../components/Loader";
-import { ComicsType } from "../types";
+import { ComicOfficialType, ComicsType } from "../types";
 
 import ComicComponent from "../components/Comic/ComicComponent";
 import Pagination from "../components/Pagination";
@@ -10,7 +10,7 @@ import { Navigate } from "react-router-dom";
 import Cookies from "js-cookie";
 
 const Comics = () => {
-  const [data, setData] = useState<ComicsType>();
+  const [dataComic, setDataComic] = useState<ComicsType>();
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [title, setTitle] = useState<string>("");
   const [page, setPage] = useState<number>(1);
@@ -25,8 +25,8 @@ const Comics = () => {
     setFilterValue(value);
   }, 500);
 
-  const dataFiltered = data
-    ? data?.results.filter((item) => {
+  const dataFiltered = dataComic
+    ? dataComic?.results.filter((item) => {
         if (filterValue) {
           return item.title
             .toLowerCase()
@@ -50,11 +50,13 @@ const Comics = () => {
           Authorization: `Bearer ${tokenCookies}`,
           "Content-Type": "application/json",
         },
+        cache: "default",
       });
       const data = await response.json();
 
-      setData(data);
+      setDataComic(data);
       setNbPages(Math.ceil(data.count / 100));
+
       setIsLoading(false);
     };
 
@@ -81,7 +83,8 @@ const Comics = () => {
             <section className="list comics-list mt-10 flex flex-col flex-wrap items-center justify-center gap-5">
               <div>
                 <h2 className="m-2 text-3xl font-bold text-white">
-                  Results: {filterValue ? dataFiltered?.length : data?.count}
+                  Results:{" "}
+                  {filterValue ? dataFiltered?.length : dataComic?.count}
                 </h2>
               </div>
               <div className="mt-10 flex flex-wrap justify-center gap-5">
@@ -101,15 +104,16 @@ const Comics = () => {
           </div>
         </div>
       )}
-      {data && (
+      {dataComic && (
         <Pagination
-          setDataComics={setData}
+          setDataComics={setDataComic}
           setIsLoading={setIsLoading}
           page={page}
           setPage={setPage}
           nbPages={nbPages}
           setSkip={setSkip}
           apiUrl={`${process.env.REACT_APP_API_URL}/comics`}
+          token={tokenCookies}
         />
       )}
     </main>

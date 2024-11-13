@@ -10,6 +10,7 @@ const CharacterComponent = ({
   addedToFavorites,
 }: {
   character: CharacterItemArray;
+
   setAddedToFavorites: React.Dispatch<React.SetStateAction<boolean>>;
   addedToFavorites: boolean;
 }) => {

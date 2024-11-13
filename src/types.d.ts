@@ -81,3 +81,71 @@ export interface FavoriteInterface {
   description: string;
   __v: number;
 }
+
+type CharactersArrayOfficialType = {
+  attributionHTML: string;
+  data: {
+    offset: number;
+    limit: number;
+    total: number;
+    count: number;
+    results: CharacterOfficialType[];
+  };
+};
+type CharacterOfficialType = {
+  id: string;
+  thumbnail: { path: string; extension: string };
+  comics: AdditionalItemFromCharacterOfficialType;
+  series: AdditionalItemFromCharacterOfficialType;
+  // stories: AdditionalItemFromCharacterOfficialType;
+  events: AdditionalItemFromCharacterOfficialType;
+  urls: URLOfficialType[];
+  modified: Date;
+  name: string;
+  description: string;
+  resourceURI: string;
+  isFavorite?: boolean;
+};
+
+type ComicArrayOfficialType = {
+  attributionHTML: string;
+  data: {
+    offset: number;
+    limit: number;
+    total: number;
+    count: number;
+    results: ComicOfficialType[];
+  };
+};
+type ComicOfficialType = {
+  id: string;
+  isbn: string;
+  format: string;
+  modified: Date;
+  title: string;
+  description: string;
+  resourceURI: string;
+  textObjects: { type: string; la; guage: string; text: string }[];
+  urls: URLOfficialType[];
+  thumbnail: { path: string; extension: string };
+  creatores: AdditionalItemFromCharacterOfficialType;
+  characters: AdditionalItemFromCharacterOfficialType;
+  events: AdditionalItemFromCharacterOfficialType;
+  isFavorite?: boolean;
+};
+
+type AdditionalItemFromCharacterOfficialType = {
+  available: number;
+  collectionURI: string;
+  items: ItemOfficlaType[];
+  returned: number;
+};
+
+type URLOfficialType = {
+  type: string;
+  url: string;
+};
+type ItemOfficlaType = {
+  resourceURI: string;
+  name: string;
+};
