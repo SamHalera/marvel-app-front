@@ -18,7 +18,6 @@ const Comic = () => {
 
   const { id } = useParams();
 
-  console.log("dataCharacters==>", dataCharacters);
   useEffect(() => {
     const fetchData = async () => {
       const tokenCookies = Cookies.get("token");
@@ -35,7 +34,7 @@ const Comic = () => {
         );
 
         const data = await response.json();
-        console.log("data==>", data);
+
         setDataComic(data.comic);
         setDataCharacters(data.charactersForComicId);
 

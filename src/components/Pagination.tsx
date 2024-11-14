@@ -82,7 +82,7 @@ const Pagination = ({
             className=" mr-3 w-16 border border-solid border-[#ed1d24] bg-transparent p-2 text-white"
             onChange={(event: ChangeEvent<HTMLInputElement>) => {
               let value = parseFloat(event.target.value);
-              console.log("value", value);
+
               if (value <= 0) {
                 value = 1;
               } else if (value > nbPages) {

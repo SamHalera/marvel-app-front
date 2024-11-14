@@ -21,7 +21,6 @@ const VideoHomeSection = () => {
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
       const [entry] = entries;
-      console.log("entry.isIntersecting==>", entry.isIntersecting);
 
       if (entry.isIntersecting) videoRef?.current?.play();
       else {

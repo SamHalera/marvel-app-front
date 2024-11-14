@@ -24,7 +24,6 @@ const Favorites = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      console.log("fetch");
       try {
         const response = await fetch(
           `${process.env.REACT_APP_API_URL}/favorites`,
