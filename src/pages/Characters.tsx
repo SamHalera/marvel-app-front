@@ -16,7 +16,6 @@ const CharacterComponent = lazy(
   () => import("../components/Character/CharacterComponent")
 );
 const Characters = () => {
-  console.log("hello");
   const [dataCharacter, setDataCharacter] = useState<CharactersType | null>(
     null
   );
@@ -47,7 +46,6 @@ const Characters = () => {
       })
     : [];
 
-  console.log("triggerErrorComp=>", triggerErrorComp);
   useEffect(() => {
     const fetchData = async () => {
       console.log("useEffect");
