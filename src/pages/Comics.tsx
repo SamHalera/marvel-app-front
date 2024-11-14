@@ -89,13 +89,14 @@ const Comics = () => {
               </div>
               <div className="mt-10 flex flex-wrap justify-center gap-5">
                 {dataFiltered &&
-                  dataFiltered.map((result) => {
+                  dataFiltered.map((result, index) => {
                     return (
                       <ComicComponent
                         key={result._id}
                         comic={result}
                         addedToFavorites={addedToFavorites}
                         setAddedToFavorites={setAddedToFavorites}
+                        index={index}
                       />
                     );
                   })}

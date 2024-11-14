@@ -21,6 +21,7 @@ const VideoHomeSection = () => {
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
       const [entry] = entries;
+      console.log("entry.isIntersecting==>", entry.isIntersecting);
 
       if (entry.isIntersecting) videoRef?.current?.play();
       else {
@@ -33,7 +34,7 @@ const VideoHomeSection = () => {
       if (videoRefCurrent) observer.unobserve(videoRefCurrent);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [videoRef]);
+  }, [videoRef, options]);
   return (
     <div className="w-full relative">
       <div className=" w-full h-full  absolute bg-violet-950/50 flex flex-col items-center justify-center gap-5">

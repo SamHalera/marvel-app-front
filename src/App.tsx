@@ -40,23 +40,25 @@ function App() {
   useEffect(() => {
     const cookies = Cookies.get("token");
 
-    cookies && setTokenCookies(cookies);
-    const fetchCurrentUser = async () => {
-      const response = await fetch(
-        `${process.env.REACT_APP_API_URL}/user/profile`,
-        {
-          headers: {
-            Authorization: `Bearer ${cookies}`,
-          },
-        }
-      );
+    if (cookies) {
+      setTokenCookies(cookies);
+      const fetchCurrentUser = async () => {
+        const response = await fetch(
+          `${process.env.REACT_APP_API_URL}/user/profile`,
+          {
+            headers: {
+              Authorization: `Bearer ${cookies}`,
+            },
+          }
+        );
 
-      const data = await response.json();
-      setCurrentEmail(data.email);
-      setCurrentUsername(data.username);
-      setCurrentAvatar(data.avatar);
-    };
-    !currentAvatar && fetchCurrentUser();
+        const data = await response.json();
+        setCurrentEmail(data.email);
+        setCurrentUsername(data.username);
+        setCurrentAvatar(data.avatar);
+      };
+      !currentAvatar && fetchCurrentUser();
+    }
     const handleScrollToTop = () => {
       if (window.scrollY > 400) {
         setScrollToTopHidden(false);
