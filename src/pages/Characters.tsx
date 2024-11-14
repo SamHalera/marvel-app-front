@@ -10,6 +10,7 @@ import Pagination from "../components/Pagination";
 import Cookies from "js-cookie";
 import { Navigate } from "react-router-dom";
 import Skeleton from "../components/Skeleton";
+import ErrorMessage from "../components/ErrorMessage";
 
 const CharacterComponent = lazy(
   () => import("../components/Character/CharacterComponent")
@@ -19,6 +20,7 @@ const Characters = () => {
     null
   );
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [triggerErrorComp, setTriggerErrorComp] = useState<boolean>(false);
   const [name, setName] = useState<string>("");
   const [page, setPage] = useState<number>(1);
   const [nbPages, setNbPages] = useState<number>(0);
@@ -46,6 +48,7 @@ const Characters = () => {
 
   useEffect(() => {
     const fetchData = async () => {
+      console.log("useEffect");
       const bodyForQuery = {
         name,
         token: tokenCookies,
@@ -64,21 +67,28 @@ const Characters = () => {
       );
 
       const data = await response.json();
-
-      setDataCharacter(data);
-      setNbPages(Math.ceil(data.count / 100));
-      setIsLoading(false);
+      console.log("data==>", data);
+      if (!data?.error) {
+        setDataCharacter(data);
+        setNbPages(Math.ceil(data.count / 100));
+        setIsLoading(false);
+      } else {
+        setTimeout(() => {
+          setIsLoading(false);
+          setTriggerErrorComp(true);
+        }, 4000);
+      }
     };
 
     tokenCookies && fetchData();
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [addedToFavorites]);
+  }, [addedToFavorites, triggerErrorComp]);
   return !tokenCookies ? (
     <Navigate to={"/"} />
   ) : (
     <main className=" mt-16">
-      <section className="bg-characters mb-8  h-[50vh] bg-cover bg-scroll bg-no-repeat md:bg-fixed">
+      <section className="bg-characters h-[50vh] bg-cover bg-scroll bg-no-repeat md:bg-fixed">
         <div className="overlay flex h-[50vh] w-full flex-col items-center justify-center bg-black bg-opacity-80 p-4">
           <h1 className="text-center text-4xl  font-bold uppercase text-white md:text-5xl">
             Find your favorite <span className="red">Heroe</span>
@@ -88,6 +98,8 @@ const Characters = () => {
       </section>
       {isLoading ? (
         <Loader />
+      ) : triggerErrorComp ? (
+        <ErrorMessage />
       ) : (
         <div className="container mx-auto my-7 px-4">
           <div className="list-container">

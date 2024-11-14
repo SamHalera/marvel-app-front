@@ -31,8 +31,11 @@ const Favorites = () => {
           }
         );
         const data = await response.json();
-        setDataFavorites(data);
-        setIsLoading(false);
+
+        if (!data.error) {
+          setDataFavorites(data);
+          setIsLoading(false);
+        }
       } catch (error: any) {
         console.log(error.response, "message error");
       }

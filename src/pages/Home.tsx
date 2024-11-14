@@ -30,24 +30,25 @@ const Home = () => {
         );
 
         const data = await response.json();
+        if (!data.error) {
+          const charactersData = data[0];
+          const comicsData = data[1];
+          setChararcters(charactersData);
 
-        const charactersData = data[0];
-        const comicsData = data[1];
-        setChararcters(charactersData);
-
-        const arrayComicsData = comicsData.results.filter(
-          (item: ComicItemArray, index: number) => {
-            if (
-              !item.thumbnail.path.includes("image_not_available") &&
-              index < 3
-            ) {
-              return item;
+          const arrayComicsData = comicsData.results.filter(
+            (item: ComicItemArray, index: number) => {
+              if (
+                !item.thumbnail.path.includes("image_not_available") &&
+                index < 3
+              ) {
+                return item;
+              }
+              return null;
             }
-            return null;
-          }
-        );
+          );
 
-        setComics(arrayComicsData);
+          setComics(arrayComicsData);
+        }
       } catch (error) {
         console.error(error);
       }

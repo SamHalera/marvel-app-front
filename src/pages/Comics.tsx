@@ -8,10 +8,12 @@ import SearchBar from "../components/SearchBar";
 import { useDebouncedCallback } from "use-debounce";
 import { Navigate } from "react-router-dom";
 import Cookies from "js-cookie";
+import ErrorMessage from "../components/ErrorMessage";
 
 const Comics = () => {
   const [dataComic, setDataComic] = useState<ComicsType>();
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [triggerErrorComp, setTriggerErrorComp] = useState<boolean>(false);
   const [title, setTitle] = useState<string>("");
   const [page, setPage] = useState<number>(1);
   const [nbPages, setNbPages] = useState<number>(0);
@@ -54,10 +56,17 @@ const Comics = () => {
       });
       const data = await response.json();
 
-      setDataComic(data);
-      setNbPages(Math.ceil(data.count / 100));
+      if (!data.error) {
+        setDataComic(data);
+        setNbPages(Math.ceil(data.count / 100));
 
-      setIsLoading(false);
+        setIsLoading(false);
+      } else {
+        setTimeout(() => {
+          setIsLoading(false);
+          setTriggerErrorComp(true);
+        }, 4000);
+      }
     };
 
     tokenCookies && fetchData();
@@ -67,7 +76,7 @@ const Comics = () => {
     <Navigate to={"/"} />
   ) : (
     <main className="comics-main mt-24">
-      <section className="bg-comics mb-8  h-[50vh] bg-cover bg-scroll bg-no-repeat md:bg-fixed">
+      <section className="bg-comics  h-[50vh] bg-cover bg-scroll bg-no-repeat md:bg-fixed">
         <div className="overlay bg flex h-[50vh] w-full flex-col items-center justify-center bg-black bg-opacity-80 p-4">
           <h1 className=" text-center text-4xl font-bold uppercase text-white md:text-5xl">
             Find your favorite <span className="red">Comic</span>
@@ -77,6 +86,8 @@ const Comics = () => {
       </section>
       {isLoading ? (
         <Loader />
+      ) : triggerErrorComp ? (
+        <ErrorMessage />
       ) : (
         <div className="container m-auto p-5">
           <div className="list-container">
