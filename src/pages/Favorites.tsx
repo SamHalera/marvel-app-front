@@ -1,14 +1,11 @@
 import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
-import { Link, Navigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import Loader from "../components/Loader";
 
 import { FavoriteInterface } from "../types";
 import clsx from "clsx";
 import { useCurrenUserStore } from "../stores/currentUser";
-import { HeartIcon } from "@heroicons/react/24/solid";
-import { handleRemoveFavorite } from "../libs/favoritesHandler";
-import { useRouter } from "next/router";
 import EmptyFavoritesComponent from "../components/Favorites/EmptyFavoritesComponent";
 import FavoritesMenuTabs from "../components/Favorites/FavoritesMenuTabs";
 import FavoriteItemComponent from "../components/Favorites/FavoriteItemComponent";
