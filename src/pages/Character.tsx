@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { CharacterDataType } from "../types";
 
 import Loader from "../components/Loader";
 import FavoritesComponent from "../components/FavoritesComponent";
-import ComicsCarousel from "../components/Character/ComicsCarousel";
 
 import Cookies from "js-cookie";
+import Carousel from "../components/Carousel";
+import { ArrowLeftIcon } from "@heroicons/react/24/solid";
 
 const Character = () => {
   const [dataCharacter, setDataCharacter] = useState<CharacterDataType>();
@@ -50,7 +51,11 @@ const Character = () => {
   return isLoading ? (
     <Loader />
   ) : (
-    <main className="one-character-main my-40">
+    <main className="container mx-auto mb-20 mt-44 h-auto lg:h-auto">
+      <Link to={"/characters"} className="btn btn-marvel m-4">
+        <ArrowLeftIcon className="size-5" />
+        Back to the Characters list
+      </Link>
       <div className="container mx-auto">
         <section className="character-wrapper">
           <div className="mb-9 flex flex-col items-center justify-center gap-5">
@@ -83,7 +88,7 @@ const Character = () => {
               </div>
             </div>
             {dataCharacter?.comics && (
-              <ComicsCarousel data={dataCharacter.comics} label="comics" />
+              <Carousel data={dataCharacter.comics} label="comics" />
             )}
           </article>
         </section>

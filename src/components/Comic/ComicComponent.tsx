@@ -3,18 +3,32 @@ import { ComicItemArray } from "../../types";
 import { Link } from "react-router-dom";
 import { truncateStr } from "../../libs/utils";
 import FavoritesComponent from "../FavoritesComponent";
+import { motion } from "framer-motion";
 
 const ComicComponent = ({
   comic,
   setAddedToFavorites,
   addedToFavorites,
+  index,
 }: {
   comic: ComicItemArray;
   setAddedToFavorites: React.Dispatch<React.SetStateAction<boolean>>;
   addedToFavorites: boolean;
+  index: number;
 }) => {
   return (
-    <article className="item comics-item my-5 flex w-72 flex-col gap-2 md:w-48 lg:w-72">
+    <motion.article
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ amount: 0, once: true }}
+      transition={{
+        duration: 0.6,
+        type: "tween",
+        ease: "easeInOut",
+        delay: index / 10,
+      }}
+      className="item comics-item my-5 flex w-72 flex-col gap-2 md:w-48 lg:w-72"
+    >
       <Link to={`/comic/${comic._id}`} className="peer">
         <img
           className="w-full object-cover object-center lg:h-72 lg:w-72 hover:opacity-50 duration-500"
@@ -35,7 +49,7 @@ const ComicComponent = ({
       <p className="text-white">
         {comic.description && truncateStr(comic.description, 120)}
       </p>
-    </article>
+    </motion.article>
   );
 };
 

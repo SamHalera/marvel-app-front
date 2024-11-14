@@ -1,3 +1,5 @@
+import { SetStateAction } from "react";
+
 export const handleAddFavorite = async (
   id: string,
   token: string,
@@ -25,7 +27,6 @@ export const handleAddFavorite = async (
     console.error(error, "<== message error");
   }
 };
-
 export const handleRemoveFavorite = async (id: string, target: string) => {
   try {
     await fetch(`${process.env.REACT_APP_API_URL}/favorites/${id}`, {

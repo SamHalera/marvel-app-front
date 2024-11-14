@@ -15,7 +15,9 @@ const CharacterComponent = lazy(
   () => import("../components/Character/CharacterComponent")
 );
 const Characters = () => {
-  const [dataCharacter, setDataCharacter] = useState<CharactersType>();
+  const [dataCharacter, setDataCharacter] = useState<CharactersType | null>(
+    null
+  );
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [name, setName] = useState<string>("");
   const [page, setPage] = useState<number>(1);
@@ -44,9 +46,6 @@ const Characters = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      // const emailQuery = user ? `&email=${user.email}` : "";
-      // title variable will be useless
-
       const bodyForQuery = {
         name,
         token: tokenCookies,
@@ -99,13 +98,14 @@ const Characters = () => {
               </h2>
               <div className="mt-10 flex flex-wrap justify-center gap-5">
                 {dataFiltered &&
-                  dataFiltered.map((result) => {
+                  dataFiltered.map((result, index) => {
                     return (
                       <Suspense key={result._id} fallback={<Skeleton />}>
                         <CharacterComponent
                           character={result}
                           addedToFavorites={addedToFavorites}
                           setAddedToFavorites={setAddedToFavorites}
+                          index={index}
                         />
                       </Suspense>
                     );
