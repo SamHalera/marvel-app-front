@@ -33,14 +33,14 @@ const VideoHomeSection = () => {
       if (videoRefCurrent) observer.unobserve(videoRefCurrent);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [videoRef]);
+  }, [videoRef, options]);
   return (
     <div className="w-full relative">
-      <div className=" w-full h-full  absolute bg-violet-950/50 flex flex-col items-center justify-center gap-5">
-        <h3 className="text-6xl font-semibold text-white text-center">
+      <div className=" w-full h-full  absolute bg-violet-950/50 flex flex-col items-center justify-center gap-2 lg:gap-5">
+        <h3 className="text-2xl lg:text-6xl font-semibold text-white text-center">
           Step into the <span className="text-primary">Marvel Universe</span>
         </h3>
-        <h4 className="text-3xl text-white text-center">
+        <h4 className="text-xl lg:text-3xl text-white text-center">
           Explore epic stories, legendary heroes, and unforgettable adventures!
         </h4>
       </div>{" "}
@@ -48,6 +48,7 @@ const VideoHomeSection = () => {
         ref={videoRef}
         controls={false}
         width="100%"
+        height="100%"
         loop
         // autoPlay={playVideo}
         muted
