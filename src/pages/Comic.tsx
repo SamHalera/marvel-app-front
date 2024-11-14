@@ -34,11 +34,12 @@ const Comic = () => {
         );
 
         const data = await response.json();
+        if (!data.error) {
+          setDataComic(data.comic);
+          setDataCharacters(data.charactersForComicId);
 
-        setDataComic(data.comic);
-        setDataCharacters(data.charactersForComicId);
-
-        setIsLoading(false);
+          setIsLoading(false);
+        }
       } catch (error) {
         console.error(error);
       }

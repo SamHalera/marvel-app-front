@@ -15,6 +15,16 @@ header {
     #06060e
   );
 }
+.bg-primary-gradient {
+  background-image: linear-gradient(
+    to right top,
+    #161a3a,
+    #13162f,
+    #111224,
+    #0d0d1a,
+    #06060e
+  );
+}
 /*=======HOME=======*/
 .hero {
   background-image: url("../src//assets/images/bg-marvel-heroes.jpg");

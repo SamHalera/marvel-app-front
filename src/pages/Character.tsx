@@ -37,9 +37,11 @@ const Character = () => {
 
         const data = await response.json();
 
-        data && setDataCharacter(data);
+        if (!data.error) {
+          setDataCharacter(data);
 
-        setIsLoading(false);
+          setIsLoading(false);
+        }
       } catch (error) {
         console.error(error);
       }
